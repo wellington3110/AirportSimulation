@@ -47,7 +47,7 @@ TEST_F(AircraftTest, planeShouldBeTakingOff)
    EXPECT_EQ(Aircraft::TAKING_OFF, plane->getActualStatus());
 }
 
-TEST_F(AircraftTest, planeShouldLanding)
+TEST_F(AircraftTest, planeShouldOnLand)
 {
    plane->sendLandingRequest(tower);
    plane->receivePermissionToLand();
@@ -55,7 +55,7 @@ TEST_F(AircraftTest, planeShouldLanding)
    ASSERT_TRUE(plane->expectationsAboutLanding());
 }
 
-TEST_F(AircraftTest, planeShouldTakeOff)
+TEST_F(AircraftTest, planeShouldTookOff)
 {
    plane->sendTakeOffRequest(tower);
    plane->receivePermissionToTakeOff();

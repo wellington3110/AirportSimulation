@@ -2,6 +2,7 @@
 #include "gtest/gtest.h"
 #include "Wind.h"
 #include "RunWay.h"
+#include "RunWayTest.h"
 
 class RunWayTest : public testing::Test
 {
@@ -17,13 +18,20 @@ protected:
    
    virtual void TearDown()
    {
+      setWindDirectionAsNorthSouth();
       delete runWay;
    }
 
-   void assertThatRunWayIsBlocked()
+   void setWindDirectionAsNorthSouth()
    {
-      instanceRunWayWithOpositeInitialWindDirection();
-      ASSERT_FALSE(runWay->isFree());    
+      while (wind->getDirection() != Wind::NORTH_SOUTH)
+         wind->randomlyChooseNewStatus();
+   }
+
+   void instaceRunWayAsFreeAndChangeToUsing()
+   {
+      instanceRunWayWithSameInitialWindDirection();
+      runWay->changeStatusToPlaneUsingRunWay();
    }
 
    void setWindWithSameDirectionOfRunWay()
@@ -35,6 +43,12 @@ protected:
       }
    }
 
+   void instanceRunWayWithSameInitialWindDirection()
+   {
+      Wind::Direction initialWindDirection = wind->getDirection();
+      runWay = new RunWay(wind, initialWindDirection);
+   }
+
    void instanceRunWayWithOpositeInitialWindDirection()
    {
       Wind::Direction opositeInitialWindDirecion= Wind::LEST_WEST;
@@ -44,19 +58,51 @@ protected:
 
 TEST_F(RunWayTest, actualStatusShouldBeFree)
 {
-   Wind::Direction initialWindDirection= wind->getDirection();
-   runWay= new RunWay(wind, initialWindDirection);
+   instanceRunWayWithSameInitialWindDirection();
    ASSERT_TRUE(runWay->isFree());
 }
 
 TEST_F(RunWayTest, actualStatusShouldBeBlockedByWind)
 {
-   assertThatRunWayIsBlocked();  
+   instanceRunWayWithOpositeInitialWindDirection();
+   ASSERT_FALSE(runWay->isFree());
 }
 
-TEST_F(RunWayTest, shouldChangeActualStatusRunWayToFree)
+TEST_F(RunWayTest, shouldChangeActualStatusFromBlockedToFree)
 {
-   assertThatRunWayIsBlocked();
+   instanceRunWayWithOpositeInitialWindDirection();
    setWindWithSameDirectionOfRunWay();
    ASSERT_TRUE(runWay->isFree());
 }
+
+TEST_F(RunWayTest, shouldChangeActualStatusFromFreeToUsing) 
+{
+   instanceRunWayWithSameInitialWindDirection();
+   ASSERT_TRUE(runWay->changeStatusToPlaneUsingRunWay());
+   EXPECT_EQ(RunWay::PLANE_USING_RUNWAY, runWay->getActualStatus());
+}
+
+TEST_F(RunWayTest, shouldChangeActualStatusFromUsingToFree)
+{
+   instaceRunWayAsFreeAndChangeToUsing();
+   ASSERT_TRUE(runWay->changeStatusToRunWayFree());
+   ASSERT_TRUE(runWay->isFree());
+}
+
+TEST_F(RunWayTest, shouldNotChangeActualStatusFromUsingToFree)
+{
+   instaceRunWayAsFreeAndChangeToUsing();
+   runWay->verifyWind();
+   ASSERT_FALSE(runWay->isFree());
+}
+
+TEST_F(RunWayTest, shouldNotChangeActualStatusFromBlockedToFree)
+{
+   instanceRunWayWithOpositeInitialWindDirection();
+   ASSERT_FALSE(runWay->changeStatusToRunWayFree());
+   ASSERT_FALSE(runWay->changeStatusToPlaneUsingRunWay());
+}
+
+
+
+

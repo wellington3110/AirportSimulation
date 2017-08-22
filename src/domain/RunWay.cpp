@@ -35,7 +35,7 @@ bool RunWay::isFree() const
 
 bool RunWay::changeStatusToRunWayFree()
 {
-   if(hasPlaneUsingRunWay()) {
+   if(hasPlaneUsingRunWay() || isFree()) {
       actualStatus= FREE;
       return true;
    }
