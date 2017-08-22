@@ -14,9 +14,15 @@ private:
    void addObserversOfTimer();
    
    void generatePlane();
-   void generateEventsToWindCreation();
-   void generateEventsToPlaneCreation();
+   void generateEventsToWind();
+   void generateEventsToPlane();
+   int generateNumberBetween(int min, int max);
 
 private:
-   std::vector<int> eventsTimeToPlaneCreation;
+   int nextWindEventTime;
+   int nextPlaneEventTime;
+
+   std::vector<int> windEventsTime;
+   std::vector<int> planeEventsTime;
+   
 };
