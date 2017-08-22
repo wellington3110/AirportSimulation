@@ -1,15 +1,18 @@
 ﻿#pragma once
+#ifndef INCLUDED_SIMULATOR_H
+#define INCLUDED_SIMULATOR_H
+
 #include "TimerObserver.h"
-#include <vector>
+#include <queue>
 
 class Simulator : public TimerObserver
 {
 public:
-   void run();   
+   void setUp();   
 private:
    void updateWind();
    void updatePlane();
-   void update(int actualTime);
+   void update(int& actualTime);
    
    void addObserversOfTimer();
    
@@ -22,7 +25,9 @@ private:
    int nextWindEventTime;
    int nextPlaneEventTime;
 
-   std::vector<int> windEventsTime;
-   std::vector<int> planeEventsTime;
+   std::queue<int> windEventsTime;
+   std::queue<int> planeEventsTime;
    
 };
+
+#endif

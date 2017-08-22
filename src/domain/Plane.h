@@ -1,17 +1,27 @@
 ﻿#pragma once
 #ifndef INCLUDED_PLANE_H
 #define INCLUDED_PLANE_H
+#include "Aircraft.h"
 
-class Airport;
+class TowerOfCommand;
 
-class Plane
+class Plane : public Aircraft
 {
 public:
-   enum planeStatus {REQUESTING_LANDING, REQUESTING_TAKEOFF, LANDING, TAKING_OFF, ON_LAND};
+
+   void update(int& actualTime);
+
+   void receivePermissionToLand();
+   void receivePermissionToTakeOff();
+   void confirmLanding(TowerOfCommand* airport);
+   void confirmTakeOff(TowerOfCommand* airport);
+   void sendLandingRequest(TowerOfCommand* airport);
+   void sendTakeOffRequest(TowerOfCommand* airport);
+   
+   AircraftStatus getActualStatus() { return actualStatus; }
 
 private:
-   Airport* airport;
-   planeStatus actualStatus;
+   AircraftStatus actualStatus;
 };
 
 #endif

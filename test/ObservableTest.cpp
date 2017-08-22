@@ -9,15 +9,18 @@ class ObservableTest : public testing::Test
 protected:
    ObservableMock* mock;
 
-   virtual void SetUp() {
+   virtual void SetUp() 
+   {
       mock= new ObservableMock;
    }
 
-   virtual void TearDown() {
+   virtual void TearDown() 
+   {
       delete mock;
    }
 
-   void addObserverInMock(int amount) {
+   void addObserverInMock(int amount) 
+   {
       for (int i = 0; i < amount; ++i) 
          mock->add(new ObserverMock);          
    }

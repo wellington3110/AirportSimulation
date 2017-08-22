@@ -20,8 +20,12 @@ void Timer::start()
 void Timer::notifyAll()
 {
    typedef std::vector<TimerObserver*>::iterator iter;
+   int actualTimeInMin= 0;
    for (iter it= observers.begin(); it != observers.end(); ++it)
-      (*it)->update(actualTime * 4);
+   {
+      actualTimeInMin= actualTime * 4;
+      (*it)->update(actualTimeInMin);   
+   }     
 }
 
 Timer* Timer::getInstance()
