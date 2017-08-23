@@ -5,14 +5,14 @@
 #include "Wind.h"
 #include "TimerObserver.h"
 
-class RunWay : public TimerObserver 
+class RunWay
 {
 public:
    RunWay(Wind* _wind, Wind::Direction _runWayDirection);
   
    enum RunWayStatus {FREE, PLANE_USING_RUNWAY, BLOCKED_BY_WIND};
 
-   void update(int& actualTime) {};
+   void update();
 
    void verifyWind();
    bool isFree() const;

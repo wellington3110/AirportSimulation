@@ -7,7 +7,7 @@ RunWay::RunWay(Wind* _wind, Wind::Direction _runWayDirection):
    verifyWind();
 }
 
-/////////////////////////////////////////////////////////////////////
+
 void RunWay::verifyWind()
 {
    if(shouldBlockRunWay())
@@ -26,7 +26,11 @@ bool RunWay::hasPlaneUsingRunWay() const
    return actualStatus == PLANE_USING_RUNWAY;
 }
 
-////////////////////////////////////////////////////////////////////
+void RunWay::update()
+{
+   verifyWind();
+}
+
 
 bool RunWay::isFree() const
 {
@@ -37,6 +41,7 @@ bool RunWay::changeStatusToRunWayFree()
 {
    if(hasPlaneUsingRunWay() || isFree()) {
       actualStatus= FREE;
+      verifyWind();
       return true;
    }
    return false;
@@ -50,6 +55,8 @@ bool RunWay::changeStatusToPlaneUsingRunWay()
    }
    return false;   
 }
+
+
 
 
 

@@ -5,7 +5,7 @@
 #include "gtest/gtest.h"
 #include "Observable.h"
 #include "Timer.h"
-#include "ObserverMock.h"
+#include "ObserverFake.h"
 
 class TimerTest : public testing::Test
 {
@@ -18,7 +18,7 @@ protected:
 
    void addObservers(int amount) {
       for (int i = 0; i < amount; ++i) 
-         timer->add(new ObserverMock);          
+         timer->add(new ObserverFake);          
    }
 };
 
@@ -33,7 +33,7 @@ TEST_F(TimerTest, shouldCountToEightMinutes)
       addObservers(1);
       timer->start();
       FAIL("Should throw the expection");
-   } catch(ObserverMock::CountedToEightMinutesExpection& expection) {
+   } catch(ObserverFake::CountedToEightMinutesException& expection) {
    }
 }
 

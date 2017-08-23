@@ -19,7 +19,7 @@ void Timer::start()
 
 void Timer::notifyAll()
 {
-   typedef std::vector<TimerObserver*>::iterator iter;
+   
    int actualTimeInMin= 0;
    for (iter it= observers.begin(); it != observers.end(); ++it)
    {

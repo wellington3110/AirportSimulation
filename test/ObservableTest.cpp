@@ -2,7 +2,7 @@
 
 #include "gtest/gtest.h"
 #include "ObservableMock.h"
-#include "ObserverMock.h"
+#include "ObserverFake.h"
 
 class ObservableTest : public testing::Test
 {
@@ -22,7 +22,7 @@ protected:
    void addObserverInMock(int amount) 
    {
       for (int i = 0; i < amount; ++i) 
-         mock->add(new ObserverMock);          
+         mock->add(new ObserverFake);          
    }
 };
 

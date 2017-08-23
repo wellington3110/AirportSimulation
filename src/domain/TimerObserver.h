@@ -6,7 +6,7 @@ class TimerObserver
 {
 public:
    virtual ~TimerObserver() {};
-   virtual void update(int& actualTime) = 0;   
+   virtual void update(const int& actualTime) = 0;   
 };
 
 #endif

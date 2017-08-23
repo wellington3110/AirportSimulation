@@ -1,17 +1,16 @@
 #pragma once
 
 #include "gtest/gtest.h"
-#include "AircraftMock.h"
+#include "AircraftFake.h"
 
 class AircraftTest : public testing::Test
 {
 protected:
-   AircraftMock* plane;
-   TowerOfCommand* tower;
+   AircraftFake* plane;
 
    virtual void SetUp()
    {
-      plane= new AircraftMock;            
+      plane= new AircraftFake;            
    }
 
    virtual void TearDown()
@@ -21,45 +20,23 @@ protected:
 
 };
 
-TEST_F(AircraftTest, planeShouldBeRequestingLanding)
+TEST_F(AircraftTest, makeSureThatMethodReceivePermissionToLandIsInvoked)
 {
-   plane->sendLandingRequest(tower);
-   EXPECT_EQ(Aircraft::REQUESTING_LANDING, plane->getActualStatus());
-}
-
-TEST_F(AircraftTest, planeShouldBeRequestingTakeOff)
-{
-   plane->sendTakeOffRequest(tower);
-   EXPECT_EQ(Aircraft::REQUESTING_TAKE_OFF, plane->getActualStatus());
-}
-
-TEST_F(AircraftTest, planeShouldBeLanding)
-{
-   plane->sendLandingRequest(tower);
    plane->receivePermissionToLand();
-   EXPECT_EQ(Aircraft::LANDING, plane->getActualStatus());
+   ASSERT_TRUE(plane->getActualStatus() == Aircraft::LANDING);
 }
 
-TEST_F(AircraftTest, planeShouldBeTakingOff)
+TEST_F(AircraftTest, makeSureThatMethodReceivePermissionToTakeOffIsInvoked)
 {
-   plane->sendTakeOffRequest(tower);
    plane->receivePermissionToTakeOff();
-   EXPECT_EQ(Aircraft::TAKING_OFF, plane->getActualStatus());
+   ASSERT_TRUE(plane->getActualStatus() == Aircraft::TAKING_OFF);
 }
 
-TEST_F(AircraftTest, planeShouldOnLand)
+TEST_F(AircraftTest, makeSureThatMethodUpdateIsInvoked)
 {
-   plane->sendLandingRequest(tower);
-   plane->receivePermissionToLand();
-   plane->confirmLanding(tower);
-   ASSERT_TRUE(plane->expectationsAboutLanding());
+   plane->update(2);
+   ASSERT_TRUE(plane->updateCall);
 }
 
-TEST_F(AircraftTest, planeShouldTookOff)
-{
-   plane->sendTakeOffRequest(tower);
-   plane->receivePermissionToTakeOff();
-   plane->confirmTakeOff(tower);
-   ASSERT_TRUE(plane->expectationsAboutTakeOff());
-}
+
 

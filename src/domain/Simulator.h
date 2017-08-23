@@ -12,7 +12,7 @@ public:
 private:
    void updateWind();
    void updatePlane();
-   void update(int& actualTime);
+   void update(const int& actualTime);
    
    void addObserversOfTimer();
    

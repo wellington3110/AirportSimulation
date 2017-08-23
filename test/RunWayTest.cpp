@@ -2,10 +2,17 @@
 #include "gtest/gtest.h"
 #include "Wind.h"
 #include "RunWay.h"
-#include "RunWayTest.h"
+
 
 class RunWayTest : public testing::Test
 {
+private:
+   void setWindDirectionAsNorthSouth()
+   {
+      while (wind->getDirection() != Wind::NORTH_SOUTH)
+         wind->randomlyChooseNewStatus();
+   }
+
 protected:
    Wind* wind;
    RunWay* runWay;
@@ -22,12 +29,6 @@ protected:
       delete runWay;
    }
 
-   void setWindDirectionAsNorthSouth()
-   {
-      while (wind->getDirection() != Wind::NORTH_SOUTH)
-         wind->randomlyChooseNewStatus();
-   }
-
    void instaceRunWayAsFreeAndChangeToUsing()
    {
       instanceRunWayWithSameInitialWindDirection();
@@ -41,6 +42,15 @@ protected:
          wind->randomlyChooseNewStatus();
          runWay->verifyWind();
       }
+   }
+
+   void setWindAnotherDirectionDiferentOfNorthSouth()
+   {
+      while (wind->getDirection() == Wind::NORTH_SOUTH)
+      {
+         wind->randomlyChooseNewStatus();
+         runWay->verifyWind();
+      }   
    }
 
    void instanceRunWayWithSameInitialWindDirection()
@@ -92,7 +102,8 @@ TEST_F(RunWayTest, shouldChangeActualStatusFromUsingToFree)
 TEST_F(RunWayTest, shouldNotChangeActualStatusFromUsingToFree)
 {
    instaceRunWayAsFreeAndChangeToUsing();
-   runWay->verifyWind();
+   setWindAnotherDirectionDiferentOfNorthSouth();
+   runWay->changeStatusToRunWayFree();
    ASSERT_FALSE(runWay->isFree());
 }
 

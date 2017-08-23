@@ -20,6 +20,7 @@ private:
 
    int actualTime;
    std::vector<TimerObserver*> observers;
+   typedef std::vector<TimerObserver*>::iterator iter;
 };
 
 #endif
