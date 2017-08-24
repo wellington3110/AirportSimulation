@@ -3,7 +3,7 @@
 #include "gtest/gtest.h"
 #include "TowerOfCommand.h"
 #include "Plane.h"
-#include "Airport.h"
+#include "TowerOfCommandDumie.h"
 
 
 class PlaneTest : public testing::Test
@@ -15,15 +15,19 @@ protected:
 
    virtual void SetUp()
    {
-      airport= Airport::getInstance();
+      airport= new TowerOfCommandDummie;
       plane= new Plane(airport, 0);
    }
+
+   virtual void TearDown()
+   {
+      delete plane;
+   } 
 
    void toLandPlane()
    {
       ASSERT_TRUE(plane->receivePermissionToLand());
       speedTimeIn(12);
-
    }
 
    void toTakeOffPlane()
@@ -51,7 +55,7 @@ protected:
    
    void ifOddAddMoreOne(int& minutes)
    {
-      if (!minutes % 2 == 0) minutes+=1;
+      if (!(minutes % 2 == 0)) minutes+=1;
    }
 
    void changePlaneStatusToRequestTakeOffIn(int minutes)
@@ -66,10 +70,7 @@ protected:
       EXPECT_EQ(expect, plane->getActualStatus());
    }
 
-   virtual void TearDown()
-   {
-      delete plane;
-   } 
+   
 
 };
 
@@ -86,6 +87,7 @@ TEST_F(PlaneTest, planeShouldBeLanding)
 
 TEST_F(PlaneTest, planeShouldBeOnLand)
 {
+   plane= new Plane(airport, 0);
    toLandPlane();
    assertThatPlaneStatusIs(Aircraft::ON_LAND);
 }

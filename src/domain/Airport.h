@@ -9,8 +9,9 @@
 class Airport : public TowerOfCommand
 {
 public:
-   static TowerOfCommand* getInstance();
-   
+   ~Airport();
+
+   static TowerOfCommand* getInstance(); 
    static TowerOfCommand* getInstance(int _spaceOnLand);
 
    enum TypeRequest {TAKE_OFF, LANDING};
@@ -26,40 +27,53 @@ public:
 private:
    Airport(int _spaceOnLand);
 
-   int spaceOnLand;
-   int planesOnLand;
-   int planesUsingRunWay;
-
    struct request
    {
       Aircraft* plane;
       int waitingTime;
-      TypeRequest type;
-      request(Aircraft* _plane, TypeRequest _type) : plane(_plane), waitingTime(0), type(_type){}
+      TypeRequest actualStatus;
+      request(Aircraft* _plane, TypeRequest _type) : plane(_plane), waitingTime(0), actualStatus(_type){}
    };
 
-   struct AirportRunWay
+   struct airportRunWay
    {
       RunWay runWay;
       Aircraft* plane;
-      AirportRunWay(RunWay _runWay) : runWay(_runWay) {};
+      airportRunWay(RunWay _runWay) : runWay(_runWay), plane(nullptr) {};
    };
 
-   std::list<request>requests;
+   int actualTime;
+   int spaceOnLand;
+   int planesOnLand; 
 
-   typedef std::list<AirportRunWay>::iterator iterRunWay;
-   std::list<AirportRunWay>runWays;
+   typedef std::list<request*>::iterator iterRequests;
+   std::list<request*>requests;
 
+   typedef std::list<airportRunWay>::iterator iterRunWays;
+   std::list<airportRunWay>runWays;
+
+   airportRunWay* getRunWayFree(request* planeRequest);
+   airportRunWay* getRunWayBeingUsed(Aircraft* plane);
+
+   request* createRequest(Aircraft* plane, TypeRequest type) {return new request(plane, type);}
+
+   bool releaseRunWay(request* planeRequest);
+   bool hasSpaceOnLand() {return spaceOnLand > planesOnLand;}
+   bool landingIsInTimeOut(iterRequests iter){return (*iter)->waitingTime == 32 && (*iter)->actualStatus == LANDING;}
+   
    void setUpRunWays();
-   bool hasRunWayFree(){return true;}
-   bool hasSpaceOnLand(){return true;}
-   AirportRunWay* getRunWayFree();
-   AirportRunWay* getRunWayBeingUsed(Aircraft* plane);
+   void updateRequests();
+   void updateTimeWaitingRequest();
+   void updateFirstInQueue();
+
+   void deleteRequest(iterRequests planeRequest);
+   void addRequestInQueue(request* request);
+   void sendRequestToPlane(request* planeRequest);
+   void processesRequest(request* newRequest);
+   void sendAircraftToAnotherAirport(iterRequests iter);
+   void addWaitingTime(iterRequests iter){(*iter)->waitingTime+= 4;}
    void processesConfirmation(TypeConfirmation type, Aircraft* plane);
 
-   void sendAircraftToAnotherAirport() {}
-   void releaseRunWay(Aircraft* plane, TypeRequest type);
-   void sendRequestToPlane(Aircraft* plane, TypeRequest type);
 };
 
 #endif
