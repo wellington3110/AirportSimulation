@@ -3,7 +3,6 @@
 #define INCLUDED_RUNWAY_H
 
 #include "Wind.h"
-#include "TimerObserver.h"
 
 class RunWay
 {
@@ -12,12 +11,11 @@ public:
   
    enum RunWayStatus {FREE, PLANE_USING_RUNWAY, BLOCKED_BY_WIND};
 
-   void update();
+   void updateStatus();
 
-   void verifyWind();
-   bool isFree() const;
-   bool changeStatusToRunWayFree();
-   bool changeStatusToPlaneUsingRunWay();
+   void changeStatusToRunWayFree();
+   void changeStatusToPlaneUsingRunWay();
+   bool isFree(){return actualStatus == FREE;}
 
    RunWayStatus getActualStatus() const { return actualStatus; }
    
@@ -26,8 +24,9 @@ private:
    RunWayStatus actualStatus;
    Wind::Direction runWayDirection;
 
-   bool shouldBlockRunWay() const;
-   bool hasPlaneUsingRunWay() const;
+   bool hasPlaneUsingRunWay() {return actualStatus == PLANE_USING_RUNWAY;}
+   bool isOppositeDirectionWind(){return runWayDirection != wind->getDirection();}
+   bool blockRunWay() {return isOppositeDirectionWind() && !hasPlaneUsingRunWay();}
 
 };
 

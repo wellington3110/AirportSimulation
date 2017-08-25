@@ -1,6 +1,6 @@
 ﻿#pragma once
-#ifndef INCLUDED_TIMEOBSERVER_H
-#define INCLUDED_TIMEOBSERVER_H
+#ifndef INCLUDED_TIMEROBSERVER_H
+#define INCLUDED_TIMEROBSERVER_H
 
 class TimerObserver
 {

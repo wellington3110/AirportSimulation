@@ -42,7 +42,7 @@ protected:
       int realTime= minutes/4;
       for (int i= 0; i < realTime; ++i)
       {
-         plane->update(1);   
+         plane->updateStatus();   
       }
    }
 
@@ -123,4 +123,9 @@ TEST_F(PlaneTest, shouldNotBeAbleToChangeStatusToRequestingLanding)
    ASSERT_FALSE(plane->receivePermissionToLand());
 }
 
-
+ TEST_F(PlaneTest, planeShouldSentAnotherAirport)
+{
+   instancePlane(20);
+   plane->receiveRequestToLandDenied();
+   assertThatPlaneStatusIs(Aircraft::SENT_ANOTHER_AIRPORT);
+}

@@ -26,6 +26,7 @@ public:
 
 private:
    Airport(int _spaceOnLand);
+   Airport(const Airport& c);
 
    struct request
    {
@@ -44,18 +45,17 @@ private:
 
    int actualTime;
    int spaceOnLand;
-   int planesOnLand; 
-
-   typedef std::list<request*>::reverse_iterator revIterRequests;
-   typedef std::list<request*>::iterator iterRequests;
+   int planesOnLand;
+   
    std::list<request*>requests;
+   typedef std::list<request*>::iterator iterRequests;
 
-   typedef std::list<airportRunWay>::iterator iterRunWays;
    std::list<airportRunWay>runWays;
+   typedef std::list<airportRunWay>::iterator iterRunWays;
 
-   airportRunWay* getRunWayFree(request* planeRequest);
    airportRunWay* getRunWayBeingUsed(Aircraft* plane);
-
+   airportRunWay* getRunWayFree(request* planeRequest);
+   
    request* createRequest(Aircraft* plane, TypeRequest type) {return new request(plane, type);}
 
    bool releaseRunWay(request* planeRequest);
@@ -63,10 +63,11 @@ private:
    bool landingIsInTimeOut(request* planeRequest){return (planeRequest->waitingTime == 32 && planeRequest->actualStatus == LANDING);}
    
    void setUpRunWays();
+   void updateRunWays();
    void updateRequests();
    void updateFirstInQueue();
-   void updateTimeWaitingRequest();
-   void addRequestInQueue(request* request);
+   void updateTimeWaitingAndStatusOfRequests();
+   void deleteRequestsFinished(int amount);
    void processesRequest(request* newRequest);
    void sendRequestToPlane(request* planeRequest);
    void sendAircraftToAnotherAirport(request* planeRequest);

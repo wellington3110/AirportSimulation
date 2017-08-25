@@ -1,6 +1,7 @@
 ﻿#include "Timer.h"
 #include "TimerObserver.h"
 #include<ctime>
+#include <iostream>
 
 static Timer* instance;
 
@@ -12,9 +13,10 @@ void Timer::start()
       if(actualTime > sec) {
          notifyAll();
          sec ++;
+         std::cout << sec << std::endl;
       }
    }
-   while (sec < 4321);
+   while (sec < 20); // alterar para o tempo correto dps
 }
 
 void Timer::notifyAll()

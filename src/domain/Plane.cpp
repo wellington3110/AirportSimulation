@@ -6,7 +6,7 @@ Plane::Plane(TowerOfCommand* _airport, int _timeOnLand): airport(_airport), time
    sendLandingRequest();
 }
 
-void Plane::update(const int& actualTime)
+void Plane::updateStatus()
 {
    switch(actualStatus)
    {
@@ -14,7 +14,7 @@ void Plane::update(const int& actualTime)
    break;
    case TAKING_OFF: confirmTakeOff(); 
    break;
-   case    ON_LAND: sendTakeOffRequest(); 
+   case    ON_LAND: sendTakeOffRequest();
    break;
    }
 }

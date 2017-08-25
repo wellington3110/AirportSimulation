@@ -15,8 +15,8 @@ public:
    void add(TimerObserver* observer){ observers.push_back(observer); }
    
 private:
-   Timer(Timer& t) {}
-   Timer() : actualTime(0) {};
+   Timer(Timer& c) {}
+   Timer() : actualTime(0) {}
 
    int actualTime;
    std::vector<TimerObserver*> observers;

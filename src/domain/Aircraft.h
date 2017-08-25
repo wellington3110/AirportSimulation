@@ -2,22 +2,23 @@
 
 #ifndef INCLUDED_AIRCRAFT_H
 #define INCLUDED_AIRCRAFT_H
-#include "TimerObserver.h"
 
 class TowerOfCommand;
 
-class Aircraft : public TimerObserver
+class Aircraft
 
 {
 public:
    virtual ~Aircraft() {}
-   enum AircraftStatus {REQUESTING_LANDING, REQUESTING_TAKE_OFF, LANDING, TAKING_OFF, ON_LAND, TOOK_OFF};
 
-   virtual void update(const int& actualTime) = 0;
+   virtual void Aircraft::updateStatus() = 0;
+
+   enum AircraftStatus {REQUESTING_LANDING, REQUESTING_TAKE_OFF, LANDING, TAKING_OFF, ON_LAND, TOOK_OFF, SENT_ANOTHER_AIRPORT};
    virtual AircraftStatus getActualStatus() = 0;
    
    virtual bool receivePermissionToLand() = 0;
    virtual bool receivePermissionToTakeOff() = 0;
+   virtual void receiveRequestToLandDenied() = 0;
 };
 
 

@@ -12,7 +12,7 @@ Wind* Wind::getInstance()
 }
 /////////////////////////////////////////////////
 
-void Wind::randomlyChooseNewStatus()
+void Wind::chooseRandomlyNewDirection()
 {
    actualDirection= static_cast<Direction>(rand() % 4);
 }

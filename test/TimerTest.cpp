@@ -22,20 +22,20 @@ protected:
    }
 };
 
-TEST_F(TimerTest, shouldBeTheSameInstance) {
-   Observable* otherInstance= Timer::getInstance();
-   ASSERT_TRUE(timer == otherInstance);
-}
-
-TEST_F(TimerTest, shouldCountToEightMinutes)
-{
-   try {
-      addObservers(1);
-      timer->start();
-      FAIL("Should throw the expection");
-   } catch(ObserverFake::CountedToEightMinutesException& expection) {
-   }
-}
+//TEST_F(TimerTest, shouldBeTheSameInstance) {
+//   Observable* otherInstance= Timer::getInstance();
+//   ASSERT_TRUE(timer == otherInstance);
+//}
+//
+//TEST_F(TimerTest, shouldCountToEightMinutes)
+//{
+//   try {
+//      addObservers(1);
+//      timer->start();
+//      FAIL("Should throw the expection");
+//   } catch(ObserverFake::CountedToEightMinutesException& expection) {
+//   }
+//}
 
 
 

@@ -1,38 +1,22 @@
 ﻿#include "Simulator.h"
 #include "Timer.h"
 #include "Airport.h"
+#include "AircraftManipulator.h"
+#include "WindManipulator.h"
 
-
-void Simulator::setUp()
+void Simulator::run(int planesOnLand)
 {
-   addObserversOfTimer();
+   addObserversOfTimer(planesOnLand);
+   Timer::getInstance()->start();
+}
+
+void Simulator::addObserversOfTimer(int planesOnLand)
+{
+   Timer::getInstance()->add(Airport::getInstance(planesOnLand));
+   Timer::getInstance()->add(AircraftManipulator::getInstance());
+   Timer::getInstance()->add(WindManipulator::getInstance());
 }
 
 
-void Simulator::addObserversOfTimer()
-{
-   Timer::getInstance()->add(Airport::getInstance());
-}
 
-void Simulator::generateEventsToWind()
-{
-   for (int eventTime = 0; eventTime < 4321;) {
-      eventTime += generateNumberBetween(40, 16);
-      windEventsTime.push(eventTime);
-   }
-}
-
-void Simulator::generateEventsToPlane()
-{
-   for (int eventTime = 0; eventTime < 4321;) {
-      eventTime += generateNumberBetween(4, 16);
-      planeEventsTime.push(eventTime);
-   }
-}
-
-int Simulator::generateNumberBetween(int min, int max)
-{
-   max = (max - min) + 1;
-   return (rand() % max) + min;
-}
 

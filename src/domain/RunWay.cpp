@@ -4,56 +4,28 @@ RunWay::RunWay(Wind* _wind, Wind::Direction _runWayDirection):
    wind(_wind), runWayDirection(_runWayDirection)
 {
    actualStatus= FREE;
-   verifyWind();
+   updateStatus();
 }
 
 
-void RunWay::verifyWind()
+void RunWay::updateStatus()
 {
-   if(shouldBlockRunWay())
+   if(blockRunWay())
       actualStatus= BLOCKED_BY_WIND;
-   else if(!hasPlaneUsingRunWay())
+}
+
+void RunWay::changeStatusToRunWayFree()
+{
+   if(!isOppositeDirectionWind() || isFree()) {
       actualStatus= FREE;
+   }else
+      actualStatus= BLOCKED_BY_WIND;
 }
 
-bool RunWay::shouldBlockRunWay() const
+void RunWay::changeStatusToPlaneUsingRunWay()
 {
-   return runWayDirection != wind->getDirection() && actualStatus == FREE;
-}
-
-bool RunWay::hasPlaneUsingRunWay() const
-{
-   return actualStatus == PLANE_USING_RUNWAY;
-}
-
-void RunWay::update()
-{
-   verifyWind();
-}
-
-
-bool RunWay::isFree() const
-{
-   return actualStatus == FREE;
-}
-
-bool RunWay::changeStatusToRunWayFree()
-{
-   if(hasPlaneUsingRunWay() || isFree()) {
-      actualStatus= FREE;
-      verifyWind();
-      return true;
-   }
-   return false;
-}
-
-bool RunWay::changeStatusToPlaneUsingRunWay()
-{
-   if(isFree()) {
-      actualStatus= PLANE_USING_RUNWAY;
-      return true;
-   }
-   return false;   
+   if(isFree())
+      actualStatus= PLANE_USING_RUNWAY;  
 }
 
 

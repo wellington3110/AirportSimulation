@@ -1,5 +1,5 @@
 #include "Airport.h"
-#include "Plane.h"
+#include "Aircraft.h"
 
 static TowerOfCommand* instance;
 
@@ -38,50 +38,58 @@ TowerOfCommand* Airport::getInstance(int _spaceOnLand)
 
 
 //////////////////////////////////////////////////////////////////////////////
-void Airport::updateRequests()
+void Airport::updateRunWays()
 {
-   updateFirstInQueue();
-   updateTimeWaitingRequest();
+   for (iterRunWays iter= runWays.begin(); iter != runWays.end(); ++iter)
+      iter->runWay.updateStatus();
 }
 
-void Airport::updateTimeWaitingRequest()
-{
-   for (revIterRequests iter= requests.rbegin(); iter != requests.rend(); ++iter) {
-      addWaitingTime(*iter);
-      if (landingIsInTimeOut(*iter)) {
-         sendAircraftToAnotherAirport(*iter);
-      }
-   }
+
+void Airport::updateRequests()
+{ 
+   updateFirstInQueue();
+   updateTimeWaitingAndStatusOfRequests();
 }
 
 void Airport::updateFirstInQueue()
 {
-   if(requests.size() > 0)
+   if (requests.size() > 0)
       if(releaseRunWay(requests.front()))
-         requests.erase(requests.begin());
+         requests.pop_front();
 }
 
 void Airport::update(const int& _actualTime)  
 {
    actualTime= _actualTime;
    updateRequests();
+   updateRunWays();
+
 }
 
+void Airport::deleteRequestsFinished(int amount)
+{
+   for (int i = 0; i < amount; ++i) {
+      requests.pop_front();  
+   }
+}
+
+void Airport::updateTimeWaitingAndStatusOfRequests()
+{
+   int requestsFinished= 0;
+   for (iterRequests request= requests.begin(); request != requests.end(); ++request) {
+      addWaitingTime(*request);
+      if (landingIsInTimeOut(*request)) {
+         sendAircraftToAnotherAirport(*request);
+         requestsFinished++;
+      }
+   }
+   deleteRequestsFinished(requestsFinished);
+}
 //////////////////////////////////////////////////////////////////////////////
 
 
 
 /////////////////////////////////Requisition Processes////////////////////////
-void Airport::addRequestInQueue(request* request)
-{
-   bool hasThisRequestInQueue= false;
-   for (iterRequests iter= requests.begin(); iter != requests.end(); ++iter)
-      if( (*iter) == request )
-         hasThisRequestInQueue= true;
-   if(!hasThisRequestInQueue)
-      requests.push_back(request);
-}
-
 bool Airport::releaseRunWay(request* planeRequest)
 {
    airportRunWay* freeRunWay= getRunWayFree(planeRequest);
@@ -114,18 +122,18 @@ void Airport::sendRequestToPlane(request* planeRequest)
       planeRequest->plane->receivePermissionToTakeOff();
 }
 
-void Airport::processesRequest(Airport::request* planeRequest)
+void Airport::processesRequest(request* planeRequest)
 {
    if(releaseRunWay(planeRequest))
       delete planeRequest;
    else
-      addRequestInQueue(planeRequest);
+      requests.push_back(planeRequest);
 }
 
 void Airport::sendAircraftToAnotherAirport(request* planeRequest)
 {
-   //requests.pop_back();
-   //adicionar relatorio de avião enviado para outro aeroporto
+   planeRequest->plane->receiveRequestToLandDenied();
+   //relatorio
 }
 
 Airport::airportRunWay* Airport::getRunWayFree(request* planeRequest)
@@ -159,12 +167,9 @@ void Airport::processesConfirmation(TypeConfirmation type, Aircraft* plane)
    if (used) {
       used->runWay.changeStatusToRunWayFree();
       used->plane= nullptr;
-      if (type == LANDED)
-         spaceOnLand++;
-      else
-         delete plane;
+      planesOnLand++;      
    } else
-      ; //jogar uma expecetion
+      ; //jogar uma expception
 }
 ///////////////////////////////////////////////////////////////////////////////////////
 

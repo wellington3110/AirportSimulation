@@ -10,7 +10,7 @@ private:
    void setWindDirectionAsNorthSouth()
    {
       while (wind->getDirection() != Wind::NORTH_SOUTH)
-         wind->randomlyChooseNewStatus();
+         wind->chooseRandomlyNewDirection();
    }
 
 protected:
@@ -39,8 +39,8 @@ protected:
    {
       while ( !runWay->isFree() )
       {
-         wind->randomlyChooseNewStatus();
-         runWay->verifyWind();
+         wind->chooseRandomlyNewDirection();
+         runWay->changeStatusToRunWayFree();
       }
    }
 
@@ -48,8 +48,8 @@ protected:
    {
       while (wind->getDirection() == Wind::NORTH_SOUTH)
       {
-         wind->randomlyChooseNewStatus();
-         runWay->verifyWind();
+         wind->chooseRandomlyNewDirection();
+         runWay->updateStatus();
       }   
    }
 
@@ -88,14 +88,14 @@ TEST_F(RunWayTest, shouldChangeActualStatusFromBlockedToFree)
 TEST_F(RunWayTest, shouldChangeActualStatusFromFreeToUsing) 
 {
    instanceRunWayWithSameInitialWindDirection();
-   ASSERT_TRUE(runWay->changeStatusToPlaneUsingRunWay());
+   runWay->changeStatusToPlaneUsingRunWay();
    EXPECT_EQ(RunWay::PLANE_USING_RUNWAY, runWay->getActualStatus());
 }
 
 TEST_F(RunWayTest, shouldChangeActualStatusFromUsingToFree)
 {
    instaceRunWayAsFreeAndChangeToUsing();
-   ASSERT_TRUE(runWay->changeStatusToRunWayFree());
+   runWay->changeStatusToRunWayFree();
    ASSERT_TRUE(runWay->isFree());
 }
 
@@ -110,8 +110,9 @@ TEST_F(RunWayTest, shouldNotChangeActualStatusFromUsingToFree)
 TEST_F(RunWayTest, shouldNotChangeActualStatusFromBlockedToFree)
 {
    instanceRunWayWithOpositeInitialWindDirection();
-   ASSERT_FALSE(runWay->changeStatusToRunWayFree());
-   ASSERT_FALSE(runWay->changeStatusToPlaneUsingRunWay());
+   runWay->changeStatusToRunWayFree();
+   runWay->changeStatusToPlaneUsingRunWay();
+   ASSERT_FALSE(runWay->isFree());
 }
 
 

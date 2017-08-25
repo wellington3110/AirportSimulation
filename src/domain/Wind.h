@@ -2,6 +2,10 @@
 #ifndef INCLUDED_WIND_H
 #define INCLUDED_WIND_H
 
+#include <vector>
+
+class WindObservers;
+
 class Wind
 {
 public:
@@ -9,15 +13,18 @@ public:
       NORTH_SOUTH, LEST_WEST, NORTHEAST_SOUTHWEST,
       NORTHWEST_SOUTHEAST 
    };
-
-   Direction& getDirection() { return actualDirection; }
+   
    static Wind* getInstance();
-   void randomlyChooseNewStatus();
+   
+   void chooseRandomlyNewDirection();
+   Direction& getDirection() { return actualDirection; }
 
 private:
    Wind() : actualDirection(NORTH_SOUTH) {}
+   Wind(const Wind& c) {}
 
    Direction actualDirection;
+   std::vector<WindObservers*> observers;
 };
 
 #endif 
