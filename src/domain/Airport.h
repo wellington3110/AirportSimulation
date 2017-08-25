@@ -46,6 +46,7 @@ private:
    int spaceOnLand;
    int planesOnLand; 
 
+   typedef std::list<request*>::reverse_iterator revIterRequests;
    typedef std::list<request*>::iterator iterRequests;
    std::list<request*>requests;
 

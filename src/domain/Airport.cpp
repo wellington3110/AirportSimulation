@@ -46,16 +46,11 @@ void Airport::updateRequests()
 
 void Airport::updateTimeWaitingRequest()
 {
-   for (iterRequests iter= requests.begin(); iter != requests.end(); ++iter) {
+   for (revIterRequests iter= requests.rbegin(); iter != requests.rend(); ++iter) {
       addWaitingTime(*iter);
-      do {
-         if (landingIsInTimeOut(*iter)) {
-            request* willDeleted = *iter;
-            iter++;
-            sendAircraftToAnotherAirport(willDeleted);
-            addWaitingTime(*iter);
-         }
-      } while (*iter);
+      if (landingIsInTimeOut(*iter)) {
+         sendAircraftToAnotherAirport(*iter);
+      }
    }
 }
 
@@ -129,7 +124,7 @@ void Airport::processesRequest(Airport::request* planeRequest)
 
 void Airport::sendAircraftToAnotherAirport(request* planeRequest)
 {
-   requests.remove(planeRequest);
+   //requests.pop_back();
    //adicionar relatorio de avião enviado para outro aeroporto
 }
 
