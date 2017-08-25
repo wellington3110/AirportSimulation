@@ -21,7 +21,6 @@ void Airport::setUpRunWays()
 }
 
 //////////////////////////////////////////////////////////////////////////////
-
 TowerOfCommand* Airport::getInstance()
 {
    if(!instance)
@@ -48,10 +47,15 @@ void Airport::updateRequests()
 void Airport::updateTimeWaitingRequest()
 {
    for (iterRequests iter= requests.begin(); iter != requests.end(); ++iter) {
-      addWaitingTime(iter);
-      if (landingIsInTimeOut(iter)) {
-         sendAircraftToAnotherAirport(iter);          
-      }     
+      addWaitingTime(*iter);
+      do {
+         if (landingIsInTimeOut(*iter)) {
+            request* willDeleted = *iter;
+            iter++;
+            sendAircraftToAnotherAirport(willDeleted);
+            addWaitingTime(*iter);
+         }
+      } while (*iter);
    }
 }
 
@@ -66,12 +70,6 @@ void Airport::update(const int& _actualTime)
 {
    actualTime= _actualTime;
    updateRequests();
-}
-
-void Airport::deleteRequest(iterRequests iter)
-{
-   requests.erase(iter);
-   delete *iter;
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -129,9 +127,9 @@ void Airport::processesRequest(Airport::request* planeRequest)
       addRequestInQueue(planeRequest);
 }
 
-void Airport::sendAircraftToAnotherAirport(iterRequests iter)
+void Airport::sendAircraftToAnotherAirport(request* planeRequest)
 {
-   deleteRequest(iter);
+   requests.remove(planeRequest);
    //adicionar relatorio de avião enviado para outro aeroporto
 }
 
@@ -151,7 +149,6 @@ Airport::airportRunWay* Airport::getRunWayFree(request* planeRequest)
 
 
 ///////////////////////////////////////////////////////////////////////////////////////
-
  Airport::airportRunWay* Airport::getRunWayBeingUsed(Aircraft* plane)
 {
    for (iterRunWays iter= runWays.begin(); iter != runWays.end(); ++iter) {

@@ -8,6 +8,7 @@
 class AirportTest : public testing::Test
 {
 protected:
+   const int timeOnLandStandard= 20;
    TowerOfCommand* airport;
    std::vector<Aircraft*> planes;
    std::vector<TimerObserver*> observers;
@@ -16,6 +17,11 @@ protected:
    {
       airport= Airport::getInstance(10);
       observers.push_back(airport);
+   }
+
+   virtual void TearDown()
+   {
+      delete airport;
    }
 
    void ifOddAddMoreOne(int& minutes)
@@ -28,11 +34,42 @@ protected:
       ifOddAddMoreOne(minutes);
       int realTime= minutes/4;
       for (int i= 0; i < realTime; ++i) {
-         for(std::vector<TimerObserver*>::iterator iter= observers.begin(); iter != observers.end(); ++iter)
-            (*iter)->update(1);
+         for (std::vector<TimerObserver*>::iterator iter = observers.begin(); iter != observers.end(); ++iter) {
+            if ((*iter) != nullptr)
+               (*iter)->update(1);
+            else
+               observers.erase(iter);
+         }
+            
       }
    }
-   
+
+   void toLandPlanes(int times) 
+   {
+      for (int i= 0; i < times; i++) {
+         Aircraft* newPlane = new Plane(airport, timeOnLandStandard);
+         planes.push_back(newPlane);
+         observers.push_back(newPlane);
+         speedTimeIn(12);
+      }
+   }
+
+   void toBeginPlanesTakeOff(int times)
+   {
+      for (int i= 0; i < times; i++) {
+         toLandPlanes(times);
+         speedTimeIn(timeOnLandStandard);
+      }
+   }
+
+   void assertThatWasDeleted(Aircraft* plane) 
+   {
+      if (plane)
+         FAIL("It should be deleted");
+      else
+         SUCCEED("It was deleted");
+   }
+ 
    void addPlanes(int amount, int timeOnLand) 
    {
       for (int i= 0; i < amount; i++) {
@@ -42,33 +79,47 @@ protected:
       }            
    }
 
-   virtual void TearDown()
+   Aircraft::AircraftStatus isEqual(Aircraft::AircraftStatus expectStatus) 
    {
-      delete airport;
+      return expectStatus;
    }
+
+   void assertThat(Aircraft::AircraftStatus actualStatus, Aircraft::AircraftStatus expectStatus)
+   {
+      EXPECT_EQ(expectStatus, actualStatus);
+   }
+   
 };
 
 TEST_F(AirportTest, airportShouldReleaseRunWayForPlaneToLand)
 {
    addPlanes(1, 20);
-   EXPECT_EQ(planes.front()->getActualStatus(), Aircraft::LANDING);
+   assertThat(planes.front()->getActualStatus(), isEqual(Aircraft::LANDING));
 }
                                                       
 TEST_F(AirportTest, airportShouldReleaseRunWayForPlaneToTakeOff)
 {
-   addPlanes(1, 20);
-   speedTimeIn(32);//tempo para pousar e solicitar decolagem
-   EXPECT_EQ(planes.front()->getActualStatus(), Aircraft::TAKING_OFF);
+   toBeginPlanesTakeOff(1);
+   assertThat(planes.front()->getActualStatus(), isEqual(Aircraft::TAKING_OFF));
 }
 
-TEST_F(AirportTest, aiportShouldNotReleaseRunWayForPlaneToLand) {
+TEST_F(AirportTest, aiportShouldNotReleaseRunWayForPlaneToLand) 
+{
    addPlanes(2, 20);
-   EXPECT_EQ(planes.back()->getActualStatus(), Aircraft::REQUESTING_LANDING);
-   // o segundo avião deve ir para a fila de espera porque as outras pistas estão bloqueadas pelo vento
+   assertThat(planes.back()->getActualStatus(), isEqual(Aircraft::REQUESTING_LANDING));
 }
 
-TEST_F(AirportTest, airportShouldNotReleaseRunWayForPlaneToTakeOff) {
-      
+TEST_F(AirportTest, airportShouldNotReleaseRunWayForPlaneToTakeOff) 
+{
+   toLandPlanes(3);
+   assertThat(planes.front()->getActualStatus(), isEqual(Aircraft::REQUESTING_TAKE_OFF));
+}
+
+TEST_F(AirportTest, airportShouldSendPlaneToAnotherAirport) 
+{
+   addPlanes(5, 20);
+   speedTimeIn(32);
+   assertThatWasDeleted(planes.back());
 }
 
 

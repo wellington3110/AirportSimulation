@@ -59,20 +59,18 @@ private:
 
    bool releaseRunWay(request* planeRequest);
    bool hasSpaceOnLand() {return spaceOnLand > planesOnLand;}
-   bool landingIsInTimeOut(iterRequests iter){return (*iter)->waitingTime == 32 && (*iter)->actualStatus == LANDING;}
+   bool landingIsInTimeOut(request* planeRequest){return (planeRequest->waitingTime == 32 && planeRequest->actualStatus == LANDING);}
    
    void setUpRunWays();
    void updateRequests();
-   void updateTimeWaitingRequest();
    void updateFirstInQueue();
-
-   void deleteRequest(iterRequests planeRequest);
+   void updateTimeWaitingRequest();
    void addRequestInQueue(request* request);
-   void sendRequestToPlane(request* planeRequest);
    void processesRequest(request* newRequest);
-   void sendAircraftToAnotherAirport(iterRequests iter);
-   void addWaitingTime(iterRequests iter){(*iter)->waitingTime+= 4;}
+   void sendRequestToPlane(request* planeRequest);
+   void sendAircraftToAnotherAirport(request* planeRequest);
    void processesConfirmation(TypeConfirmation type, Aircraft* plane);
+   void addWaitingTime(request* planeRequest) { planeRequest->waitingTime += 4; }
 
 };
 
