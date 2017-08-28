@@ -3,10 +3,11 @@
 #define INCLUDED_WIND_H
 
 #include <vector>
+#include "DataVendorToReport.h"
 
 class WindObservers;
 
-class Wind
+class Wind : public DataVendorToReport
 {
 public:
    enum Direction {
@@ -20,7 +21,7 @@ public:
    Direction& getDirection() { return actualDirection; }
 
 private:
-   Wind() : actualDirection(NORTH_SOUTH) {}
+   Wind() : DataVendorToReport(), actualDirection(NORTH_SOUTH) {}
    Wind(const Wind& c) {}
 
    Direction actualDirection;

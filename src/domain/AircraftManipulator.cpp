@@ -32,13 +32,18 @@ void AircraftManipulator::generateEventsToPlane()
 
 void AircraftManipulator::update(const int& actualTime)
 { 
-   for(iterAircraft iter= planes.begin(); iter != planes.end(); ++iter)
+   for(iterAircraft iter= planes.begin(); iter != planes.end();) {
       (*iter)->updateStatus();
-   if(planeEventsTime.size() > 0) {
-      if (isValidGenerateAircraft(actualTime))
-         generatePlane();
+      if(aircraftWasSentAnotherAirport(*iter))
+         iter= planes.erase(iter);
+      else
+         iter ++;
    }
-   //delete aviões que fora enviados para outro aeroporto
+
+   if (isValidGenerateAircraft(actualTime))
+         generatePlane();
+
+   
 }
 
 

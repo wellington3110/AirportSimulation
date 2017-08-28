@@ -1,10 +1,11 @@
-#pragma once
-
-#include "gtest/gtest.h"
-#include "TowerOfCommand.h"
-#include "Airport.h"
-#include "Plane.h"
-
+//#pragma once
+//
+//#include "gtest/gtest.h"
+//#include "TowerOfCommand.h"
+//#include "Airport.h"
+//#include "Plane.h"
+//#include "AircraftManipulator.h"
+//
 //class AirportTest : public testing::Test
 //{
 //protected:

@@ -5,8 +5,9 @@
 #include "TowerOfCommand.h"
 #include <list>
 #include "RunWay.h"
+#include "DataVendorToReport.h"
 
-class Airport : public TowerOfCommand
+class Airport : public TowerOfCommand, public DataVendorToReport
 {
 public:
    ~Airport();
@@ -21,8 +22,8 @@ public:
 
    virtual void receiveLandingRequest(Aircraft* plane);
    virtual void receiveTakeOffRequest(Aircraft* plane);
-   virtual void receiveConfirmationLanding(Aircraft* plane) {processesConfirmation(LANDED, plane);}
    virtual void receiveConfirmationTakeOff(Aircraft* plane) {processesConfirmation(TOOK_OFF, plane);}
+   virtual void receiveConfirmationLanding(Aircraft* plane) {planesLanding++, processesConfirmation(LANDED, plane);}
 
 private:
    Airport(int _spaceOnLand);
@@ -46,6 +47,8 @@ private:
    int actualTime;
    int spaceOnLand;
    int planesOnLand;
+   int planesLanding;
+   int takeOffPending;  
    
    std::list<request*>requests;
    typedef std::list<request*>::iterator iterRequests;
@@ -66,10 +69,10 @@ private:
    void updateRunWays();
    void updateRequests();
    void updateFirstInQueue();
-   void updateTimeWaitingAndStatusOfRequests();
    void deleteRequestsFinished(int amount);
    void processesRequest(request* newRequest);
-   void sendRequestToPlane(request* planeRequest);
+   void updateTimeWaitingAndStatusOfRequests();
+   void sendPermissionToPlane(request* planeRequest);
    void sendAircraftToAnotherAirport(request* planeRequest);
    void processesConfirmation(TypeConfirmation type, Aircraft* plane);
    void addWaitingTime(request* planeRequest) { planeRequest->waitingTime += 4; }
