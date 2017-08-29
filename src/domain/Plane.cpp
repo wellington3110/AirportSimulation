@@ -12,7 +12,7 @@ void Plane::updateStatus()
    {
    case    LANDING: confirmLanding(); 
    break;
-   case TAKING_OFF: confirmTakeOff(); 
+   case    TAKING_OFF: confirmTakeOff(); 
    break;
    case    ON_LAND: sendTakeOffRequest();
    break;

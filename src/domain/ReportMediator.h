@@ -12,5 +12,6 @@ public:
 private:
    ReportMediator(){}
    ReportMediator(const ReportMediator&);
+
    void send(Data* data);
 };

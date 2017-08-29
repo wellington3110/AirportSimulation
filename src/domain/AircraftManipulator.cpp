@@ -30,18 +30,25 @@ void AircraftManipulator::generateEventsToPlane()
 }
 
 
+bool AircraftManipulator::aircraftTookOff(AircraftManipulator::iterAircraft iter)
+{
+   return (*iter)->getActualStatus() == Aircraft::TOOK_OFF;
+}
+
 void AircraftManipulator::update(const int& actualTime)
 { 
    for(iterAircraft iter= planes.begin(); iter != planes.end();) {
       (*iter)->updateStatus();
-      if(aircraftWasSentAnotherAirport(*iter))
+      if(aircraftWasSentAnotherAirport(*iter) || aircraftTookOff(iter))
          iter= planes.erase(iter);
       else
          iter ++;
    }
 
-   if (isValidGenerateAircraft(actualTime))
-         generatePlane();
+   if (isValidGenerateAircraft(actualTime)) {
+      generatePlane();
+      planeEventsTime.pop();     
+   }
 
    
 }

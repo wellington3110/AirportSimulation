@@ -1,5 +1,6 @@
 #include "Airport.h"
 #include "Aircraft.h"
+#include "Data.h"
 
 static TowerOfCommand* instance;
 
@@ -8,17 +9,18 @@ Airport::~Airport()
    instance= nullptr;
 }
 
-Airport::Airport(int _spaceOnLand): DataVendorToReport(), spaceOnLand(_spaceOnLand), planesOnLand(0), takeOffPending(0)
+Airport::Airport(int _spaceOnLand): DataVendorToReport(), spaceOnLand(_spaceOnLand), planesOnLand(0), takeOffPending(0), planesLanding(0)
 {
    setUpRunWays();
 }
 
 void Airport::setUpRunWays()
 {
-   runWays.push_back(airportRunWay( RunWay(Wind::getInstance(), Wind::NORTH_SOUTH) ));
-   runWays.push_back(airportRunWay( RunWay(Wind::getInstance(), Wind::LEST_WEST) ));
-   runWays.push_back(airportRunWay( RunWay(Wind::getInstance(), Wind::NORTHEAST_SOUTHWEST) ));
+   runWays.push_back(AirportRunWay( RunWay(Wind::getInstance(), Wind::NORTH_SOUTH) ));
+   runWays.push_back(AirportRunWay( RunWay(Wind::getInstance(), Wind::LEST_WEST) ));
+   runWays.push_back(AirportRunWay( RunWay(Wind::getInstance(), Wind::NORTHEAST_SOUTHWEST) ));
 }
+
 
 //////////////////////////////////////////////////////////////////////////////
 TowerOfCommand* Airport::getInstance()
@@ -37,61 +39,95 @@ TowerOfCommand* Airport::getInstance(int _spaceOnLand)
 //////////////////////////////////////////////////////////////////////////////
 
 
+
+//--------------------------------Process of update---------------------------/
 //////////////////////////////////////////////////////////////////////////////
+
+void Airport::update(const int& _actualTime)  
+{
+   actualTime= _actualTime;
+   updateRunWays();
+   updateRequests();
+   updateCriticalReports();
+
+}
+
 void Airport::updateRunWays()
 {
    for (iterRunWays iter= runWays.begin(); iter != runWays.end(); ++iter)
       iter->runWay.updateStatus();
 }
 
+//////////////////////////////////////////////////////////////////////////////
+
 void Airport::updateRequests()
 { 
    updateFirstInQueue();
-   updateTimeWaitingAndStatusOfRequests();
+   updateWaitingTimeRequest();
 }
 
 void Airport::updateFirstInQueue()
-{
+{  
    if (requests.size() > 0)
       if(releaseRunWay(requests.front()))
-         requests.pop_front();
+         requests.pop_front();  
 }
 
-void Airport::update(const int& _actualTime)  
+void Airport::updateWaitingTimeRequest()
 {
-   actualTime= _actualTime;
-   updateRequests();
-   updateRunWays();
-
-}
-
-void Airport::deleteRequestsFinished(int amount)
-{
-   for (int i = 0; i < amount; ++i) {
-      requests.pop_front();  
-   }
-}
-
-void Airport::updateTimeWaitingAndStatusOfRequests()
-{
-   int requestsFinished= 0;
-   for (iterRequests request= requests.begin(); request != requests.end(); ++request) {
+   for (iterRequests request= requests.begin(); request != requests.end();) {
       addWaitingTime(*request);
       if (landingIsInTimeOut(*request)) {
          sendAircraftToAnotherAirport(*request);
-         requestsFinished++;
-      }
+         request= requests.erase(request);
+      } else
+         request++;
    }
-   deleteRequestsFinished(requestsFinished);
 }
+
 //////////////////////////////////////////////////////////////////////////////
+
+void Airport::updateCriticalReports()
+{ 
+   updatePlanesWaitingGreaterThanFiveReport();   
+   updateCapacityExceededReport();
+   updatePlanesRequestingTakeOffGreaterThanFiveReport();
+   updatePlanesWaitingAmountReport();
+}
+
+void Airport::updateCapacityExceededReport()
+{
+   if( capacityExceeded() )
+      sendDateToReport(Data::getInstance(actualTime, Data::PLANES_ON_LAND_EXCEEDED_CAPACITY));
+}
+
+void Airport::updatePlanesWaitingAmountReport()
+{
+   if(requests.size() > 0)
+      sendDateToReport(Data::getInstance(requests.back()->waitingTime, requests.size(), Data::PLANES_WAITING));
+}
+
+void Airport::updatePlanesWaitingGreaterThanFiveReport()
+{
+   if (requests.size() > 5) 
+      sendDateToReport(Data::getInstance(actualTime, Data::WAITING_GREATER_THAN_5));
+}
+
+void Airport::updatePlanesRequestingTakeOffGreaterThanFiveReport()
+{
+   if(takeOffPending > 5)
+      sendDateToReport(Data::getInstance(actualTime, Data::REQUESTING_TAKE_OFF_GREATER_THAN_5));
+}
+
+//////////////////////////////////////////////////////////////////////////////
+//---------------------------------------------------------------------------/
 
 
 
 /////////////////////////////////Requisition Processes////////////////////////
-bool Airport::releaseRunWay(request* planeRequest)
+bool Airport::releaseRunWay(Request* planeRequest)
 {
-   airportRunWay* freeRunWay= getRunWayFree(planeRequest);
+   AirportRunWay* freeRunWay= getRunWayFree(planeRequest);
    if (freeRunWay){ 
       sendPermissionToPlane(planeRequest);
       freeRunWay->plane= planeRequest->plane;
@@ -103,18 +139,26 @@ bool Airport::releaseRunWay(request* planeRequest)
 
 void Airport::receiveLandingRequest(Aircraft* plane)
 {
-   request* newRequest= createRequest(plane, LANDING);
+   Request* newRequest= new Request(plane, LANDING);
    processesRequest(newRequest);
 }
 
 void Airport::receiveTakeOffRequest(Aircraft* plane)
 {
-   request* newRequest= createRequest(plane, TAKE_OFF);
-   processesRequest(newRequest);
+   Request* newRequest= new Request(plane, TAKE_OFF);
    takeOffPending ++;
+   processesRequest(newRequest);   
 }
 
-void Airport::sendPermissionToPlane(request* planeRequest)
+void Airport::processesRequest(Request* planeRequest)
+{
+   if (requests.size() == 0 && releaseRunWay(planeRequest))
+      delete planeRequest;
+   else
+      requests.push_back(planeRequest);
+}
+
+void Airport::sendPermissionToPlane(Request* planeRequest)
 {
    if (planeRequest->actualStatus == LANDING) { 
       planeRequest->plane->receivePermissionToLand();
@@ -124,23 +168,16 @@ void Airport::sendPermissionToPlane(request* planeRequest)
       takeOffPending --;
       planesOnLand --;
    }
+   sendDateToReport(Data::getInstance(planesOnLand, Data::PLANES_ON_LAND));
 }
 
-void Airport::processesRequest(request* planeRequest)
-{
-   if (releaseRunWay(planeRequest))
-      delete planeRequest;
-   else
-      requests.push_back(planeRequest);
-}
-
-void Airport::sendAircraftToAnotherAirport(request* planeRequest)
+void Airport::sendAircraftToAnotherAirport(Request* planeRequest)
 {
    planeRequest->plane->receiveRequestToLandDenied();
-   //relatorio
+   sendDateToReport(Data::getInstance(actualTime, Data::PLANES_SENT_ANOTHER_AIRPORT));
 }
 
-Airport::airportRunWay* Airport::getRunWayFree(request* planeRequest)
+Airport::AirportRunWay* Airport::getRunWayFree(Request* planeRequest)
 {
    if (planeRequest->actualStatus == LANDING && !hasSpaceOnLand())
       return nullptr;
@@ -156,7 +193,14 @@ Airport::airportRunWay* Airport::getRunWayFree(request* planeRequest)
 
 
 ///////////////////////////////////////////////////////////////////////////////////////
- Airport::airportRunWay* Airport::getRunWayBeingUsed(Aircraft* plane)
+void Airport::receiveConfirmationLanding(Aircraft* plane)
+{
+   processesConfirmation(LANDED, plane);
+   planesLanding++;
+   sendDateToReport(Data::getInstance(planesLanding, Data::LANDED));
+} 
+
+Airport::AirportRunWay* Airport::getRunWayBeingUsed(Aircraft* plane)
 {
    for (iterRunWays iter= runWays.begin(); iter != runWays.end(); ++iter) {
       if (iter->plane == plane)
@@ -167,7 +211,7 @@ Airport::airportRunWay* Airport::getRunWayFree(request* planeRequest)
 
 void Airport::processesConfirmation(TypeConfirmation type, Aircraft* plane)
 {
-   airportRunWay* used= getRunWayBeingUsed(plane);
+   AirportRunWay* used= getRunWayBeingUsed(plane);
    if (used) {
       used->runWay.changeStatusToRunWayFree();
       used->plane= nullptr;      

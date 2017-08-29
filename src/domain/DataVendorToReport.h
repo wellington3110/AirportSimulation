@@ -11,10 +11,10 @@ public:
 
 protected:
    DataVendorToReport();
-   void send(Data* data);
+   void sendDateToReport(Data* data);
+   
+private:
    Mediator* mediator;
-
-private:  
    DataVendorToReport(const DataVendorToReport&);
 
 };

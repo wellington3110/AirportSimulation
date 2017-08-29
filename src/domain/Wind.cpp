@@ -1,4 +1,5 @@
 ﻿#include "Wind.h"
+#include "Data.h"
 #include <cstdlib>
 
 //////////////////////////////////////////////////
@@ -12,9 +13,13 @@ Wind* Wind::getInstance()
 }
 /////////////////////////////////////////////////
 
-void Wind::chooseRandomlyNewDirection()
+void Wind::updateDirection(const int& actualTime)
 {
-   actualDirection= static_cast<Direction>(rand() % 4);
+   Direction oldDirection= actualDirection; 
+   do {
+      actualDirection= static_cast<Direction>(rand() % 4);   
+   } while (actualDirection == oldDirection);
+   sendDateToReport(Data::getInstance(actualTime, Data::WIND_CHANGES));
 }
 
 

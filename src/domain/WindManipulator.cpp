@@ -7,7 +7,7 @@ static WindManipulator* instance;
 void WindManipulator::generateEventsToWind()
 {
    for (int eventTime = 0; eventTime < 4321;) {
-      eventTime += RandomNumberGenerator::generateNumberBetween(40, 16);
+      eventTime += RandomNumberGenerator::generateNumberBetween(16, 40);
       windEventsTime.push(eventTime);
    }
 }
@@ -22,8 +22,10 @@ WindManipulator* WindManipulator::getInstance()
 void WindManipulator::update(const int& actualTime)
 {
    if(windEventsTime.size() > 0) {
-      if(isValidUpdateStatusWind(actualTime))
-         Wind::getInstance()->chooseRandomlyNewDirection();
+      if(isValidUpdateStatusWind(actualTime)){
+         windEventsTime.pop();
+         Wind::getInstance()->updateDirection(actualTime);
+      }
    }
 }
 

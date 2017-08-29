@@ -49,7 +49,7 @@ TEST_F(WindTest, makeSureEveryDirectionsAreChosenOnce)
 {
    addAllDirectionsInVector();
    do {
-      wind->chooseRandomlyNewDirection();
+      wind->updateDirection(1);
       compareActualDirectionWithAllDirections(*directions) ? directions->pop_back() : 0;
    } while (directions->size() > 0);
    ASSERT_TRUE(directions->size() == 0);

@@ -5,7 +5,7 @@
 class TowerOfCommandDummie : public TowerOfCommand
 {
 public:
-   virtual void update(const int& actualTime) {}
+   virtual void update(int actualTime) {}
    
    virtual void receiveLandingRequest(Aircraft* plane){}
    virtual void receiveTakeOffRequest(Aircraft* plane){} 

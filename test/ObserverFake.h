@@ -8,7 +8,7 @@ class ObserverFake : public TimerObserver
 {
 public:
 
-   virtual void update(const int& actualTime)
+   virtual void update(int actualTime)
    {
       if(actualTime == 8)
       {

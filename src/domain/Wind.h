@@ -17,12 +17,12 @@ public:
    
    static Wind* getInstance();
    
-   void chooseRandomlyNewDirection();
+   void updateDirection(const int& actualTime);
    Direction& getDirection() { return actualDirection; }
 
 private:
    Wind() : DataVendorToReport(), actualDirection(NORTH_SOUTH) {}
-   Wind(const Wind& c) {}
+   Wind(const Wind&);
 
    Direction actualDirection;
    std::vector<WindObservers*> observers;

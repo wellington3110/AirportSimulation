@@ -12,6 +12,8 @@ void RunWay::updateStatus()
 {
    if(blockRunWay())
       actualStatus= BLOCKED_BY_WIND;
+   else if(!hasPlaneUsingRunWay())
+      actualStatus= FREE;
 }
 
 void RunWay::changeStatusToRunWayFree()

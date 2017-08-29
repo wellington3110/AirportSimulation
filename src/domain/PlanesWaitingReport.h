@@ -7,15 +7,14 @@
 class PlanesWaitingReport : public Report
 {
 public:
-   PlanesWaitingReport() : value(0), time(0) {}
+   PlanesWaitingReport(){}
 
 protected:
-   void store(Data* data);
-   std::string generateReport(); 
+   void insert(Data* data);
+   std::string getReportData() { return data; } 
    
 private:
-   int value;
-   int time;
+   std::string data;
 }; 
 
 #endif

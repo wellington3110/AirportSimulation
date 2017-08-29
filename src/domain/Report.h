@@ -11,11 +11,7 @@ class Report
 public:
    virtual ~Report(){}
 
-   void insert(Data* data) { store(data); }
-   std::string getReportData(){ return generateReport(); }
-
-protected:
-   virtual void store(Data* data) = 0;
-   virtual std::string generateReport() = 0;
+   virtual void insert(Data* data) = 0;
+   virtual std::string getReportData() = 0;
 };
 #endif

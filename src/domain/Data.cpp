@@ -2,6 +2,12 @@
 
 static Data* instance;
 
+
+Data::~Data()
+{
+   instance= nullptr;
+}
+
 Data* Data::getInstance(int _onlyOneValue, DataType type)
 {
    return getInstance(_onlyOneValue, _onlyOneValue, type);

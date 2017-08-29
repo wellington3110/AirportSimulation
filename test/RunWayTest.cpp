@@ -10,7 +10,7 @@ private:
    void setWindDirectionAsNorthSouth()
    {
       while (wind->getDirection() != Wind::NORTH_SOUTH)
-         wind->chooseRandomlyNewDirection();
+         wind->updateDirection(1);
    }
 
 protected:
@@ -39,7 +39,7 @@ protected:
    {
       while ( !runWay->isFree() )
       {
-         wind->chooseRandomlyNewDirection();
+         wind->updateDirection(1);
          runWay->changeStatusToRunWayFree();
       }
    }
@@ -48,7 +48,7 @@ protected:
    {
       while (wind->getDirection() == Wind::NORTH_SOUTH)
       {
-         wind->chooseRandomlyNewDirection();
+         wind->updateDirection(1);
          runWay->updateStatus();
       }   
    }

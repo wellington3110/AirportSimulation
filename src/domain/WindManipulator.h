@@ -10,15 +10,19 @@ class WindManipulator : public TimerObserver
 public:
    static WindManipulator* getInstance();
 
-   void generateEventsToWind();
-   bool isValidUpdateStatusWind(const int& actualTime){return windEventsTime.front() <= actualTime;}
+   
    void update(const int& actualTime);
 
 private:
-   WindManipulator(){generateEventsToWind();}
+   WindManipulator(){ generateEventsToWind();}
    WindManipulator(const WindManipulator&){}
 
    std::queue<int> windEventsTime;
+
+   void generateEventsToWind();
+
+   bool isValidUpdateStatusWind(const int& actualTime) { return windEventsTime.front() <= actualTime && windEventsTime.size() > 0; }
+
 };
 
 #endif

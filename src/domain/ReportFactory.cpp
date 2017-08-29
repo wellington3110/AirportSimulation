@@ -1,34 +1,31 @@
 ﻿#include "ReportFactory.h"
-#include "LandedReport.h"
-#include "OnLandReport.h"
-#include "PlanesOnLandExceededCapacityReport.h"
-#include "PlanesSentAnotherAirportReport.h"
-#include "PlanesWaitingGreaterThanFiveReport.h"
+#include "TimeHistoricReport.h"
+#include "SingleValueWithoutHistoricReport.h"
 #include "PlanesWaitingReport.h"
-#include "RequestTakeOffGreaterThanFiveReport.h"
-#include "WindReport.h"
 
 static ReportFactory* instance;
 
-static WindReport* windReport;
-static LandedReport* landedReport;
-static OnLandReport* onLandReport;
-static PlanesWaitingReport* planesWaiting;
-static PlanesSentAnotherAirportReport* planesSentAnotherAirportReport;
-static PlanesOnLandExceededCapacityReport* planesOnLandExceededCapacity;
-static PlanesWaitingGreaterThanFiveReport* planesWaitingGreaterThanFive;
-static RequestTakeOffGreaterThanFiveReport* requestTakeOffGreaterThanFive;
+static Report* windReport;
+static Report* landedReport;
+static Report* onLandReport;
+static Report* planesWaiting;
+static Report* planesSentAnotherAirportReport;
+static Report* planesOnLandExceededCapacity;
+static Report* planesWaitingGreaterThanFive;
+static Report* requestTakeOffGreaterThanFive;
 
 ReportFactory::ReportFactory()
 {
-   windReport= new WindReport;
-   landedReport= new LandedReport;
-   onLandReport= new OnLandReport;
    planesWaiting= new PlanesWaitingReport;
-   planesSentAnotherAirportReport= new PlanesSentAnotherAirportReport;
-   planesOnLandExceededCapacity= new PlanesOnLandExceededCapacityReport;
-   planesWaitingGreaterThanFive= new PlanesWaitingGreaterThanFiveReport;
-   requestTakeOffGreaterThanFive= new RequestTakeOffGreaterThanFiveReport;
+
+   landedReport= new SingleValueWithoutHistoricReport;
+   onLandReport= new SingleValueWithoutHistoricReport;
+
+   windReport= new TimeHistoricReport();
+   planesOnLandExceededCapacity=   new  TimeHistoricReport();
+   planesWaitingGreaterThanFive=   new  TimeHistoricReport();
+   requestTakeOffGreaterThanFive=  new TimeHistoricReport();
+   planesSentAnotherAirportReport= new TimeHistoricReport();
 }
 
 ReportFactory::~ReportFactory()

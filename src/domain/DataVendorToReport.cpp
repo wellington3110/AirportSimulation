@@ -6,7 +6,7 @@ DataVendorToReport::DataVendorToReport()
    mediator= ReportMediator::getInstance();
 }
 
-void DataVendorToReport::send(Data* data)
+void DataVendorToReport::sendDateToReport(Data* data)
 {
    mediator->receive(data);   
 }
