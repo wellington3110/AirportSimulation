@@ -10,12 +10,12 @@ void Timer::start()
    int sec= 0;
    do {
       actualTime= clock()/CLOCKS_PER_SEC;
-      if (actualTime > sec) {
+     if (actualTime > sec) {
          notifyAll();
          sec ++;
          std::cout << sec << std::endl;;
       }
-   } while (sec < 1081);
+   } while (sec < 1080);
 }
 
 void Timer::notifyAll()

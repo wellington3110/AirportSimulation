@@ -13,6 +13,6 @@ Mediator* ReportMediator::getInstance()
 
 void ReportMediator::send(Data* data)
 {
-   Report* report= ReportFactory::getInstace()->retrieveReport(data->getType());
+   Report* report= ReportFactory::getInstance()->retrieveReport(data->getType());
    report->insert(data);
 }

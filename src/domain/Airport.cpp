@@ -67,9 +67,12 @@ void Airport::updateRequests()
 }
 
 void Airport::updateFirstInQueue()
-{  
+{
+   if ( capacityExceeded() && !isTakeOffFirstInQueue()) 
+      putTakeOffRequestAtFirstInQueue();
+
    if (requests.size() > 0)
-      if(releaseRunWay(requests.front()))
+      if (releaseRunWay(requests.front()))
          requests.pop_front();  
 }
 
@@ -82,6 +85,18 @@ void Airport::updateWaitingTimeRequest()
          request= requests.erase(request);
       } else
          request++;
+   }
+}
+
+void Airport::putTakeOffRequestAtFirstInQueue()
+{
+   for (iterRequests request= requests.begin(); request != requests.end(); request++) {
+      if ( (*request)->actualStatus == TAKE_OFF ) {
+         Request* firstInQueue= new Request(*request);
+         requests.erase(request);
+         requests.push_front(firstInQueue);
+         break;
+      }
    }
 }
 

@@ -7,7 +7,7 @@
 class PlanesWaitingReport : public Report
 {
 public:
-   PlanesWaitingReport(){}
+   PlanesWaitingReport() : data("0"){}
 
 protected:
    void insert(Data* data);

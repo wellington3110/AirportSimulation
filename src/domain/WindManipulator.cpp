@@ -6,7 +6,7 @@ static WindManipulator* instance;
 
 void WindManipulator::generateEventsToWind()
 {
-   for (int eventTime = 0; eventTime < 4321;) {
+   for (int eventTime = 0; eventTime < 4320;) {
       eventTime += RandomNumberGenerator::generateNumberBetween(16, 40);
       windEventsTime.push(eventTime);
    }

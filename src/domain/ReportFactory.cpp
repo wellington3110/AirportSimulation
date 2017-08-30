@@ -3,8 +3,6 @@
 #include "SingleValueWithoutHistoricReport.h"
 #include "PlanesWaitingReport.h"
 
-static ReportFactory* instance;
-
 static Report* windReport;
 static Report* landedReport;
 static Report* onLandReport;
@@ -13,6 +11,8 @@ static Report* planesSentAnotherAirportReport;
 static Report* planesOnLandExceededCapacity;
 static Report* planesWaitingGreaterThanFive;
 static Report* requestTakeOffGreaterThanFive;
+
+static ReportFactory* instance;
 
 ReportFactory::ReportFactory()
 {
@@ -40,10 +40,10 @@ ReportFactory::~ReportFactory()
    delete requestTakeOffGreaterThanFive;
 }
 
-ReportFactory* ReportFactory::getInstace()
+ReportFactory* ReportFactory::getInstance()
 {
    if (!instance)
-      instance= new ReportFactory;
+      instance= new ReportFactory();
    return instance;
 }
 

@@ -1,6 +1,7 @@
 ﻿#pragma once
 #ifndef INCLUDED_TOWEROFCOMMAND_H
 #define INCLUDED_TOWEROFCOMMAND_H
+
 #include "TimerObserver.h"
 
 class RunWay;

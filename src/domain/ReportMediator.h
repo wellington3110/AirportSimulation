@@ -1,4 +1,7 @@
 ﻿#pragma once
+#ifndef INCLUDED_REPORT_MEDIATOR_H
+#define INCLUDED_REPORT_MEDIATOR_H
+
 #include "Mediator.h"
 #include "Data.h"
 
@@ -15,3 +18,6 @@ private:
 
    void send(Data* data);
 };
+
+#endif
+

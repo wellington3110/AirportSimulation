@@ -66,6 +66,7 @@ private:
    bool releaseRunWay(Request* planeRequest);
    bool hasSpaceOnLand() {return spaceOnLand > planesOnLand;}
    bool capacityExceeded() {return planesOnLand > (spaceOnLand * 70) / 100 ;}
+   bool isTakeOffFirstInQueue() {return requests.size() > 0 ? requests.front()->actualStatus == TAKE_OFF : false;}
    bool landingIsInTimeOut(Request* planeRequest){return (planeRequest->waitingTime >= 32 && planeRequest->actualStatus == LANDING);}
    
    void setUpRunWays();
@@ -73,10 +74,11 @@ private:
    void updateRequests();
    void updateFirstInQueue();
    void updateCriticalReports();
+   void updateWaitingTimeRequest();
    void updateCapacityExceededReport();
    void updatePlanesWaitingAmountReport();
+   void putTakeOffRequestAtFirstInQueue();
    void processesRequest(Request* newRequest);
-   void updateWaitingTimeRequest();
    void updatePlanesWaitingGreaterThanFiveReport();
    void sendPermissionToPlane(Request* planeRequest);
    void sendAircraftToAnotherAirport(Request* planeRequest);

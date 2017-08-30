@@ -23,7 +23,7 @@ void AircraftManipulator::generatePlane()
 
 void AircraftManipulator::generateEventsToPlane()
 {
-   for (int eventTime = 0; eventTime < 4321;) {
+   for (int eventTime = 0; eventTime < 4320;) {
       eventTime+= RandomNumberGenerator::generateNumberBetween(4,16);
       planeEventsTime.push(eventTime);
    }

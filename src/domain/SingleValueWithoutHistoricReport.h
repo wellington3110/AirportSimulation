@@ -7,7 +7,7 @@
 class SingleValueWithoutHistoricReport : public Report
 {
 public:
-   SingleValueWithoutHistoricReport() : data(0) {}
+   SingleValueWithoutHistoricReport() : data("0"){}
 
 protected:
    void insert(Data* _data);

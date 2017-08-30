@@ -8,10 +8,11 @@ class Report;
 
 class ReportFactory
 {
+
 public:
    ~ReportFactory();
 
-   static ReportFactory* getInstace();
+   static ReportFactory* getInstance();
    Report* retrieveReport(Data::DataType type);
    
 private:

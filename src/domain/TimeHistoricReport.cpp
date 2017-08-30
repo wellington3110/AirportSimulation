@@ -9,8 +9,10 @@ void TimeHistoricReport::insert(Data* data)
 
 std::string TimeHistoricReport::getReportData()
 {
+   if( historic.size() == 0)
+      return "Nada registrado até o momento";
    std::string report;
    for (iter it= historic.begin(); it != historic.end(); it++)
-      report= *it + "/n";
+      report= *it + "\n";
    return report;
 }

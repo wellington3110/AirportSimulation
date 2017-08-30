@@ -1,6 +1,7 @@
 ﻿#pragma once
 #ifndef INCLUDED_PLANE_H
 #define INCLUDED_PLANE_H
+
 #include "Aircraft.h"
 
 class TowerOfCommand;
