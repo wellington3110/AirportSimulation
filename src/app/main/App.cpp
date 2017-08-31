@@ -12,6 +12,7 @@
 #include "CmdIdle.h"
 #include "Simulator.h"
 #include <Windows.h>
+
 #include "CmdRemoveData.h"
 
 App::~App()
@@ -24,18 +25,18 @@ App::App()
    gui= new ConsoleGui;
 }
 
+int planesOnLand;
 DWORD WINAPI threadSimulator(LPVOID p)
 {
-   int planeOnLand= reinterpret_cast<int>(p);
    Simulator s;
-   s.run(planeOnLand);
+   s.run(planesOnLand);
    return 0;
 }
 
 void App::startSimulator()
 {
-   int planesOnLand= gui->getPlanesOnLand();
-   CreateThread(nullptr, 0, threadSimulator, &planesOnLand, 0, nullptr);
+   planesOnLand= gui->getPlanesOnLand();
+   CreateThread(0, 0, threadSimulator, 0, 0, 0);
 }
 
 void App::run()

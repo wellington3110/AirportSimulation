@@ -23,9 +23,11 @@ private:
    Gui* gui;
 
    bool executeCmd(int option);
-   Command* createCmd(int option); 
+   Command* createCmd(int option);
 
    void startSimulator();
+
+   friend void threadSimu(void* data);
    
 };
 

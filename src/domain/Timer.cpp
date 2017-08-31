@@ -4,6 +4,8 @@
 
 static Timer* instance;
 
+_CrtMemState s1, s2;
+
 void Timer::start()
 {
    int sec= 0;
@@ -14,7 +16,7 @@ void Timer::start()
          actualTime ++;
          notifyAll();
          sec ++;
-      //}  
+      //}
    } while (sec < 1080);
 }
 
