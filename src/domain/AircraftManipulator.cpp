@@ -5,6 +5,11 @@
 
 static AircraftManipulator* instance;
 
+AircraftManipulator::~AircraftManipulator()
+{
+   planes.clear();
+}
+
 AircraftManipulator* AircraftManipulator::getInstance()
 {
    if(!instance)

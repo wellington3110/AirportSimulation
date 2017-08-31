@@ -9,6 +9,8 @@
 class AircraftManipulator: public TimerObserver
 {
 public:
+   ~AircraftManipulator();
+
    static AircraftManipulator* getInstance();
 
    void generatePlane();

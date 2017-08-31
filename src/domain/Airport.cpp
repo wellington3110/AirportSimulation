@@ -4,10 +4,6 @@
 
 static TowerOfCommand* instance;
 
-Airport::~Airport()
-{
-   instance= nullptr;
-}
 
 Airport::Airport(int _spaceOnLand): DataVendorToReport(), spaceOnLand(_spaceOnLand), planesOnLand(0), takeOffPending(0), planesLanding(0)
 {

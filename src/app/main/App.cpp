@@ -50,6 +50,7 @@ void App::run()
 
 bool App::executeCmd(int option)
 {
+   _CrtMemState s1, s2;
    auto* cmdActual= createCmd(option);
    cmdActual->execute(gui);
    delete cmdActual;
@@ -58,6 +59,7 @@ bool App::executeCmd(int option)
 
 Command* App::createCmd(int option)
 {
+   _CrtMemState s1, s2;
    switch (option) {
       case LANDED:                                          return new CmdLandingsNumber;
       case ON_LAND:                                         return new CmdPlanesOnLandNumber;
