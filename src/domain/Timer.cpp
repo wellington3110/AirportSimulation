@@ -1,20 +1,20 @@
 ﻿#include "Timer.h"
 #include "TimerObserver.h"
 #include<ctime>
-#include <iostream>
 
 static Timer* instance;
 
 void Timer::start()
 {
    int sec= 0;
+   actualTime= 0;
    do {
-      actualTime= clock()/CLOCKS_PER_SEC;
-     if (actualTime > sec) {
+      //actualTime= clock()/CLOCKS_PER_SEC;
+      //if (actualTime > sec) {
+         actualTime ++;
          notifyAll();
          sec ++;
-         std::cout << sec << std::endl;;
-      }
+      //}  
    } while (sec < 1080);
 }
 

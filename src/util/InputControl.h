@@ -8,7 +8,7 @@ public:
    InputControl() {};
 
    static void clearBuffer();
-   static bool processInput(int& input);
+   static int processInput();
 };
 
 #endif

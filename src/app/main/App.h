@@ -2,10 +2,10 @@
 #ifndef INCLUDED_APP_H
 #define INCLUDED_APP_H
 
+
 class Command;
+class Simulator;
 class Gui;
-class ReportFactory;
-class Report;
 
 class App
 {
@@ -21,10 +21,9 @@ public:
 
 private:
    Gui* gui;
-   ReportFactory* data;
 
    bool executeCmd(int option);
-   Command* createCmd(int option);
+   Command* createCmd(int option); 
 
    void startSimulator();
    

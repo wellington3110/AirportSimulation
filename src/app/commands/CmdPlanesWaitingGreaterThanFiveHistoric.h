@@ -11,7 +11,7 @@ public:
    void execute(Gui* gui) { generateReport(Data::WAITING_GREATER_THAN_5, gui); }
 
 protected:
-   std::string getPresentationMessage() { return "Histórico de aviões aguardando maior que 5:"; }
+   std::string getPresentationMessage() { return "Histórico de aviões aguardando maior que 5:\n"; }
 
 };
 

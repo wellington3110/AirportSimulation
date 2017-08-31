@@ -5,5 +5,5 @@
 void PlanesWaitingReport::insert(Data* _data)
 {
    data= "Quantidade: " + Converter::toString(_data->getValue()) +
-      "Tempo: " + Converter::toString(_data->getTime()) + "\n"; 
+      " | Tempo aguardando: " + Converter::toString(_data->getTime()) + " minutos"; 
 }

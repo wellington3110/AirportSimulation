@@ -12,8 +12,10 @@ public:
       PLANES_ON_LAND_EXCEEDED_CAPACITY, PLANES_SENT_ANOTHER_AIRPORT, REQUESTING_TAKE_OFF_GREATER_THAN_5
    };
    
-   static Data* getInstance(int _onlyOneValue, DataType type);
-   static Data* getInstance(int _time, int _value, DataType type);
+   static void deleteData();
+   static Data* createData(int _onlyOneValue, DataType type);
+   static Data* createData(int _time, int _value, DataType type);
+   
 
    int getTime(){ return time; }
    int getValue(){ return value; }

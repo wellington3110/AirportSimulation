@@ -16,6 +16,7 @@ void Plane::updateStatus()
    break;
    case    ON_LAND: sendTakeOffRequest();
    break;
+   default:;
    }
 }
 

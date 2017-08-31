@@ -24,7 +24,7 @@ private:
    typedef std::vector<Aircraft*>::iterator iterAircraft;
 
    void generateEventsToPlane();
-   bool aircraftTookOff(AircraftManipulator::iterAircraft iter);
+   bool aircraftTookOff(iterAircraft iter);
 
    bool aircraftWasSentAnotherAirport(Aircraft* aircraft) { return aircraft->getActualStatus() == Aircraft::SENT_ANOTHER_AIRPORT; }
    bool isValidGenerateAircraft(const int& actualTime) { return planeEventsTime.front() <= actualTime && planeEventsTime.size() > 0; }

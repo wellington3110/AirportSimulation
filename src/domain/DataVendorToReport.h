@@ -8,7 +8,7 @@ class Data;
 class DataVendorToReport
 {
 public:
-   virtual ~DataVendorToReport() {}
+   virtual ~DataVendorToReport();
 
 protected:
    DataVendorToReport();

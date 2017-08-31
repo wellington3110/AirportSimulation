@@ -2,18 +2,23 @@
 
 static Data* instance;
 
-
 Data::~Data()
 {
+}
+
+void Data::deleteData()
+{
+   if(instance)
+      delete instance;
    instance= nullptr;
 }
 
-Data* Data::getInstance(int _onlyOneValue, DataType type)
+Data* Data::createData(int _onlyOneValue, DataType type)
 {
-   return getInstance(_onlyOneValue, _onlyOneValue, type);
+   return createData(_onlyOneValue, _onlyOneValue, type);
 }
 
-Data* Data::getInstance(int _time, int _value, DataType type)
+Data* Data::createData(int _time, int _value, DataType type)
 {
    if(instance)
       delete instance;

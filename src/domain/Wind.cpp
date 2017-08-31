@@ -19,7 +19,7 @@ void Wind::updateDirection(const int& actualTime)
    do {
       actualDirection= static_cast<Direction>(rand() % 4);   
    } while (actualDirection == oldDirection);
-   sendDateToReport(Data::getInstance(actualTime, Data::WIND_CHANGES));
+   sendDateToReport(Data::createData(actualTime, Data::WIND_CHANGES));
 }
 
 

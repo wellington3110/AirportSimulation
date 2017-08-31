@@ -4,6 +4,13 @@
 
 static WindManipulator* instance;
 
+
+WindManipulator::~WindManipulator()
+{
+   delete Wind::getInstance();
+   instance= nullptr;
+}
+
 void WindManipulator::generateEventsToWind()
 {
    for (int eventTime = 0; eventTime < 4320;) {

@@ -12,11 +12,13 @@ public:
 
    int doInput();
    int getMenuOption();
+   int getPlanesOnLand();
 
    void showMenu();
    void clearDisplay() { system("cls"); }
    void showMessage(std::string message){ std::cout << message;}
 
+   
 };
 
 #endif

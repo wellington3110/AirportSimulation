@@ -8,8 +8,9 @@
 class WindManipulator : public TimerObserver
 {
 public:
-   static WindManipulator* getInstance();
+   ~WindManipulator();
 
+   static WindManipulator* getInstance();
    
    void update(const int& actualTime);
 

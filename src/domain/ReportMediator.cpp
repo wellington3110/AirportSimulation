@@ -4,6 +4,18 @@
 
 static Mediator* instance;
 
+ReportMediator::~ReportMediator()
+{
+   Data::deleteData();
+}
+
+void ReportMediator::deleteInstance()
+{
+   if(instance)
+      delete instance;
+   instance= nullptr;
+}
+
 Mediator* ReportMediator::getInstance()
 {
    if(!instance)

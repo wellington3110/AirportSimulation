@@ -5,7 +5,9 @@
 class Simulator
 {
 public:
-   void run(int planesOnLand);      
+   ~Simulator();
+   void run(int planesOnLand);
+   
 private:
    void addObserversOfTimer(int planesOnLand); 
    

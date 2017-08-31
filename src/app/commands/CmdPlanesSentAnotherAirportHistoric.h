@@ -11,7 +11,7 @@ public:
    void execute(Gui* gui)  {generateReport(Data::PLANES_SENT_ANOTHER_AIRPORT, gui); }
 
 protected:
-   std::string getPresentationMessage() { return "Histórico de aviões enviados para outros aeroportos: ";}
+   std::string getPresentationMessage() { return "Histórico de aviões enviados para outros aeroportos:\n";}
 };
 
 #endif

@@ -7,14 +7,15 @@ void InputControl::clearBuffer()
    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
 }
 
-bool InputControl::processInput(int& input)
+int InputControl::processInput()
 {
+   int input= 0;
    std::cin >> input;
    if (std::cin.fail() ) {
       clearBuffer();
-      return false;
+      throw std::runtime_error("\nerror:Invalid input \n\n");
    }
-   return true;
+   return input;
 }
 
 

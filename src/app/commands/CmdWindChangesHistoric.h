@@ -11,7 +11,7 @@ public:
    void execute(Gui* gui) { generateReport(Data::WIND_CHANGES, gui); }
 
 protected:
-   std::string getPresentationMessage() { return "Histórico de mudanças da direção do vento: \n"; }
+   std::string getPresentationMessage() { return "Histórico de mudanças da direção do vento:\n"; }
 };
 
 #endif

@@ -16,7 +16,7 @@ public:
    void add(TimerObserver* observer){ observers.push_back(observer); }
    
 private:
-   Timer(Timer& c) {}
+   Timer(Timer& c);
    Timer() : actualTime(0) {}
 
    int actualTime;

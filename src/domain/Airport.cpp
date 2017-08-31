@@ -84,7 +84,7 @@ void Airport::updateWaitingTimeRequest()
          sendAircraftToAnotherAirport(*request);
          request= requests.erase(request);
       } else
-         request++;
+         ++request;
    }
 }
 
@@ -113,25 +113,25 @@ void Airport::updateCriticalReports()
 void Airport::updateCapacityExceededReport()
 {
    if( capacityExceeded() )
-      sendDateToReport(Data::getInstance(actualTime, Data::PLANES_ON_LAND_EXCEEDED_CAPACITY));
+      sendDateToReport(Data::createData(actualTime, Data::PLANES_ON_LAND_EXCEEDED_CAPACITY));
 }
 
 void Airport::updatePlanesWaitingAmountReport()
 {
-   if(requests.size() > 0)
-      sendDateToReport(Data::getInstance(requests.back()->waitingTime, requests.size(), Data::PLANES_WAITING));
+   if (requests.size() > 0)
+      sendDateToReport(Data::createData(requests.back()->waitingTime, requests.size(), Data::PLANES_WAITING));
 }
 
 void Airport::updatePlanesWaitingGreaterThanFiveReport()
 {
    if (requests.size() > 5) 
-      sendDateToReport(Data::getInstance(actualTime, Data::WAITING_GREATER_THAN_5));
+      sendDateToReport(Data::createData(actualTime, Data::WAITING_GREATER_THAN_5));
 }
 
 void Airport::updatePlanesRequestingTakeOffGreaterThanFiveReport()
 {
-   if(takeOffPending > 5)
-      sendDateToReport(Data::getInstance(actualTime, Data::REQUESTING_TAKE_OFF_GREATER_THAN_5));
+   if (takeOffPending > 5)
+      sendDateToReport(Data::createData(actualTime, Data::REQUESTING_TAKE_OFF_GREATER_THAN_5));
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -167,7 +167,7 @@ void Airport::receiveTakeOffRequest(Aircraft* plane)
 
 void Airport::processesRequest(Request* planeRequest)
 {
-   if (requests.size() == 0 && releaseRunWay(planeRequest))
+   if (requests.size() == 0 && releaseRunWay (planeRequest))
       delete planeRequest;
    else
       requests.push_back(planeRequest);
@@ -183,13 +183,13 @@ void Airport::sendPermissionToPlane(Request* planeRequest)
       takeOffPending --;
       planesOnLand --;
    }
-   sendDateToReport(Data::getInstance(planesOnLand, Data::PLANES_ON_LAND));
+   sendDateToReport(Data::createData(planesOnLand, Data::PLANES_ON_LAND));
 }
 
 void Airport::sendAircraftToAnotherAirport(Request* planeRequest)
 {
    planeRequest->plane->receiveRequestToLandDenied();
-   sendDateToReport(Data::getInstance(actualTime, Data::PLANES_SENT_ANOTHER_AIRPORT));
+   sendDateToReport(Data::createData(actualTime, Data::PLANES_SENT_ANOTHER_AIRPORT));
 }
 
 Airport::AirportRunWay* Airport::getRunWayFree(Request* planeRequest)
@@ -212,7 +212,7 @@ void Airport::receiveConfirmationLanding(Aircraft* plane)
 {
    processesConfirmation(LANDED, plane);
    planesLanding++;
-   sendDateToReport(Data::getInstance(planesLanding, Data::LANDED));
+   sendDateToReport(Data::createData(planesLanding, Data::LANDED));
 } 
 
 Airport::AirportRunWay* Airport::getRunWayBeingUsed(Aircraft* plane)

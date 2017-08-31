@@ -11,7 +11,7 @@ public:
    void execute(Gui* gui) { generateReport(Data::REQUESTING_TAKE_OFF_GREATER_THAN_5, gui); }
 
 protected:
-   std::string getPresentationMessage() { return "Histórico de decolagens pendentes acima de 5: "; }
+   std::string getPresentationMessage() { return "Histórico de decolagens pendentes acima de 5:\n"; }
 };
 
 #endif

@@ -6,17 +6,36 @@ int ConsoleGui::getMenuOption()
    showMenu();
    try {
       showMessage("Escolha a opção: ");
-      return doInput();
+      int option= doInput();
+      clearDisplay();
+      return option;
    } catch(std::runtime_error e) {
       showMessage(e.what());
       getMenuOption();
    }
+   return 0;
+}
+
+int ConsoleGui::getPlanesOnLand()
+{
+   try{
+      showMessage("Número máximo de aviões em solo: ");
+      int planesOnLand= doInput();
+      clearDisplay();
+      return planesOnLand;
+   } catch(std::runtime_error e) {
+      clearDisplay();
+      showMessage(e.what());
+      getPlanesOnLand();
+   }
+   return 0;
 }
 
 int ConsoleGui::doInput()
 {
-   int input= 0;
-   return InputControl::processInput(input) ? input : throw std::runtime_error("Error: Invalid input \n\n"); 
+   int input= InputControl::processInput();
+   showMessage("\n");
+   return input; 
 }
 
 void ConsoleGui::showMenu()
@@ -31,7 +50,7 @@ void ConsoleGui::showMenu()
    << "6. Horários com aviões em solo maior que 70% da capacidade \n"
    << "7. Horários com aviões enviados a outros aerportos \n"
    << "8. Horários com solicitações para decolagens pendentes acima de 5 \n"
-   << "50. Limpar tela"
+   << "50. Limpar tela\n"
    << "99. Exit \n\n";
 }
 

@@ -4,6 +4,15 @@
 #include "AircraftManipulator.h"
 #include "WindManipulator.h"
 
+
+Simulator::~Simulator()
+{
+   delete Timer::getInstance();
+   delete Airport::getInstance();
+   delete AircraftManipulator::getInstance();
+   delete WindManipulator::getInstance();
+}
+
 void Simulator::run(int planesOnLand)
 {
    addObserversOfTimer(planesOnLand);

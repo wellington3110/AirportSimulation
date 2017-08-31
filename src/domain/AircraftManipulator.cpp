@@ -2,7 +2,6 @@
 #include "RandomNumberGenerator.h"
 #include "Plane.h"
 #include "Airport.h"
-#include "Timer.h"
 
 static AircraftManipulator* instance;
 
@@ -30,7 +29,7 @@ void AircraftManipulator::generateEventsToPlane()
 }
 
 
-bool AircraftManipulator::aircraftTookOff(AircraftManipulator::iterAircraft iter)
+bool AircraftManipulator::aircraftTookOff(iterAircraft iter)
 {
    return (*iter)->getActualStatus() == Aircraft::TOOK_OFF;
 }
@@ -42,7 +41,7 @@ void AircraftManipulator::update(const int& actualTime)
       if(aircraftWasSentAnotherAirport(*iter) || aircraftTookOff(iter))
          iter= planes.erase(iter);
       else
-         iter ++;
+         ++iter;
    }
 
    if (isValidGenerateAircraft(actualTime)) {

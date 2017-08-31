@@ -22,7 +22,7 @@ std::string Converter::toTimeFormat(int time)
    int hora= (time/60) - dia * 24;
    int minuto= time % 60;
 
-   stream << "Dia: " << dia + 1 << " | Tempo: ";
+   stream << "Dia: " << dia + 1 << " | Horário: ";
    addAZero(stream, hora);
    stream << ":";
    addAZero(stream, minuto);
