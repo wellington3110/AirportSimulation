@@ -4,6 +4,11 @@
 
 static TowerOfCommand* instance;
 
+Airport::~Airport()
+{
+   for (iterRequests request= requests.begin(); request != requests.end(); ++request)
+      delete *request;
+}
 
 Airport::Airport(int _spaceOnLand): DataVendorToReport(), spaceOnLand(_spaceOnLand), planesOnLand(0), takeOffPending(0), planesLanding(0)
 {
@@ -16,7 +21,6 @@ void Airport::setUpRunWays()
    runWays.push_back(AirportRunWay( RunWay(Wind::getInstance(), Wind::LEST_WEST) ));
    runWays.push_back(AirportRunWay( RunWay(Wind::getInstance(), Wind::NORTHEAST_SOUTHWEST) ));
 }
-
 
 //////////////////////////////////////////////////////////////////////////////
 TowerOfCommand* Airport::getInstance()
@@ -78,6 +82,7 @@ void Airport::updateWaitingTimeRequest()
       addWaitingTime(*request);
       if (landingIsInTimeOut(*request)) {
          sendAircraftToAnotherAirport(*request);
+         delete *request;
          request= requests.erase(request);
       } else
          ++request;

@@ -7,7 +7,8 @@ static AircraftManipulator* instance;
 
 AircraftManipulator::~AircraftManipulator()
 {
-   planes.clear();
+   for (iterAircraft iter= planes.begin(); iter != planes.end(); ++iter)
+      delete *iter;
 }
 
 AircraftManipulator* AircraftManipulator::getInstance()
@@ -41,11 +42,12 @@ bool AircraftManipulator::aircraftTookOff(iterAircraft iter)
 
 void AircraftManipulator::update(const int& actualTime)
 { 
-   for(iterAircraft iter= planes.begin(); iter != planes.end();) {
+   for (iterAircraft iter= planes.begin(); iter != planes.end();) {
       (*iter)->updateStatus();
-      if(aircraftWasSentAnotherAirport(*iter) || aircraftTookOff(iter))
+      if (aircraftWasSentAnotherAirport(*iter) || aircraftTookOff(iter)) {
+         delete *iter;
          iter= planes.erase(iter);
-      else
+      } else
          ++iter;
    }
 

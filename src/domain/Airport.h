@@ -10,6 +10,7 @@
 class Airport : public TowerOfCommand, public DataVendorToReport
 {
 public:
+   ~Airport();
 
    static TowerOfCommand* getInstance(); 
    static TowerOfCommand* getInstance(int _spaceOnLand);
