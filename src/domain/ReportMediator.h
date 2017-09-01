@@ -1,6 +1,6 @@
 ﻿#pragma once
-#ifndef INCLUDED_REPORT_MEDIATOR_H
-#define INCLUDED_REPORT_MEDIATOR_H
+#ifndef INCLUDED_REPORTMEDIATOR_H
+#define INCLUDED_REPORTMEDIATOR_H
 
 #include "Mediator.h"
 
@@ -11,7 +11,6 @@ public:
    static void deleteInstance();
    static Mediator* getInstance();
    
-
    void receive(Data* data) { send(data); }
 
 private:

@@ -6,12 +6,12 @@ static Mediator* instance;
 
 ReportMediator::~ReportMediator()
 {
-   Data::deleteData();
+   Data::deleteDataInstance();
 }
 
 void ReportMediator::deleteInstance()
 {
-   if(instance)
+   if (instance)
       delete instance;
    instance= nullptr;
 }

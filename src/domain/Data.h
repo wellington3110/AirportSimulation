@@ -1,5 +1,5 @@
 ﻿#pragma once
-#ifndef INCLUDED_DATA_H
+#ifndef  INCLUDED_DATA_H
 #define INCLUDED_DATA_H
 
 class Data
@@ -12,7 +12,7 @@ public:
       PLANES_ON_LAND_EXCEEDED_CAPACITY, PLANES_SENT_ANOTHER_AIRPORT, REQUESTING_TAKE_OFF_GREATER_THAN_5
    };
    
-   static void deleteData();
+   static void deleteDataInstance();
    static Data* createData(int _onlyOneValue, DataType type);
    static Data* createData(int _time, int _value, DataType type);
    

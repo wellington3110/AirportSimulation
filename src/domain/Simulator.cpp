@@ -4,13 +4,26 @@
 #include "AircraftManipulator.h"
 #include "WindManipulator.h"
 
+static Simulator* instance;
 
-Simulator::~Simulator()
+Simulator::~Simulator() 
 {
    delete Timer::getInstance();
    delete Airport::getInstance();
    delete AircraftManipulator::getInstance();
    delete WindManipulator::getInstance();
+}
+
+Simulator* Simulator::getInstance()
+{
+   if (!instance)
+      instance= new Simulator;
+   return instance;
+}
+
+void Simulator::stop()
+{
+   Timer::getInstance()->stop();
 }
 
 void Simulator::run(int planesOnLand)

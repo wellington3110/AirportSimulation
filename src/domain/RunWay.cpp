@@ -10,23 +10,23 @@ RunWay::RunWay(Wind* _wind, Wind::Direction _runWayDirection):
 
 void RunWay::updateStatus()
 {
-   if(blockRunWay())
+   if (blockRunWay())
       actualStatus= BLOCKED_BY_WIND;
-   else if(!hasPlaneUsingRunWay())
+   else if (!hasPlaneUsingRunWay())
       actualStatus= FREE;
 }
 
 void RunWay::changeStatusToRunWayFree()
 {
-   if(!isOppositeDirectionWind() || isFree()) {
+   if (!isOppositeDirectionWind() || isFree()) {
       actualStatus= FREE;
-   }else
+   } else
       actualStatus= BLOCKED_BY_WIND;
 }
 
 void RunWay::changeStatusToPlaneUsingRunWay()
 {
-   if(isFree())
+   if (isFree())
       actualStatus= PLANE_USING_RUNWAY;  
 }
 

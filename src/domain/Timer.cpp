@@ -9,14 +9,14 @@ _CrtMemState s1, s2;
 void Timer::start()
 {
    int sec= 0;
-   actualTime= 0;
    do {
-      //actualTime= clock()/CLOCKS_PER_SEC;
-      //if (actualTime > sec) {
-         actualTime ++;
+      actualTime= clock()/CLOCKS_PER_SEC;
+      if (stopTime == true)
+         break;
+      if (actualTime > sec) {
          notifyAll();
          sec ++;
-      //}
+      }
    } while (sec < 1080);
 }
 

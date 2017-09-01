@@ -18,6 +18,7 @@
 App::~App()
 {
    delete gui;
+   delete Simulator::getInstance();
 }
 
 App::App()
@@ -25,18 +26,18 @@ App::App()
    gui= new ConsoleGui;
 }
 
-int planesOnLand;
-DWORD WINAPI threadSimulator(LPVOID p)
+DWORD WINAPI threadSimulator(LPVOID param)
 {
-   Simulator s;
-   s.run(planesOnLand);
+   int* planesOnLand= static_cast<int*>(param);
+   Simulator::getInstance()->run(*planesOnLand);
+   delete planesOnLand;
    return 0;
 }
 
 void App::startSimulator()
 {
-   planesOnLand= gui->getPlanesOnLand();
-   CreateThread(0, 0, threadSimulator, 0, 0, 0);
+   int* planesOnLand= new int(gui->getPlanesOnLand());
+   CreateThread(nullptr, 0, threadSimulator, planesOnLand, 0, nullptr);
 }
 
 void App::run()
@@ -50,7 +51,6 @@ void App::run()
 
 bool App::executeCmd(int option)
 {
-   _CrtMemState s1, s2;
    auto* cmdActual= createCmd(option);
    cmdActual->execute(gui);
    delete cmdActual;
@@ -58,8 +58,8 @@ bool App::executeCmd(int option)
 }
 
 Command* App::createCmd(int option)
-{
-   _CrtMemState s1, s2;
+{   
+   
    switch (option) {
       case LANDED:                                          return new CmdLandingsNumber;
       case ON_LAND:                                         return new CmdPlanesOnLandNumber;
@@ -70,7 +70,7 @@ Command* App::createCmd(int option)
       case SENT_ANOTHER_AIRPORT_HISTORIC:                   return new CmdPlanesSentAnotherAirportHistoric;
       case TAKE_OFF_REQUESTS_GREATER_THAN_FIVE:             return new CmdTakeOffRequestGreaterThanFiveHistoric;
       case CLS: gui->clearDisplay();                        return new CmdIdle();
-      case EXIT:                                            return new CmdRemoveData();
+      case EXIT: Simulator::getInstance()->stop();          return new CmdRemoveData();
       default: gui->showMessage("error: Invalid input \n"); return new CmdIdle();   
    }
    

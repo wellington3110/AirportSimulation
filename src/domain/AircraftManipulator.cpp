@@ -13,7 +13,7 @@ AircraftManipulator::~AircraftManipulator()
 
 AircraftManipulator* AircraftManipulator::getInstance()
 {
-   if(!instance)
+   if (!instance)
       instance= new AircraftManipulator();
    return instance;
 }

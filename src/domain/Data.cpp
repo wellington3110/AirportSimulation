@@ -6,7 +6,7 @@ Data::~Data()
 {
 }
 
-void Data::deleteData()
+void Data::deleteDataInstance()
 {
    if(instance)
       delete instance;

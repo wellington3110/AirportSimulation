@@ -27,7 +27,6 @@ private:
 
    void startSimulator();
 
-   friend void threadSimu(void* data);
    
 };
 

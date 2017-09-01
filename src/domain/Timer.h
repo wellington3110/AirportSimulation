@@ -13,13 +13,15 @@ public:
    static Timer* getInstance();
 
    void notifyAll();
+   void stop() {stopTime= true;}
    void add(TimerObserver* observer){ observers.push_back(observer); }
    
 private:
    Timer(Timer& c);
-   Timer() : actualTime(0) {}
+   Timer() : actualTime(0), stopTime(false) {}
 
    int actualTime;
+   bool stopTime;
    std::vector<TimerObserver*> observers;
    typedef std::vector<TimerObserver*>::iterator iter;
 };

@@ -6,9 +6,16 @@ class Simulator
 {
 public:
    ~Simulator();
+
+   static Simulator* getInstance();
+
+   void stop();
    void run(int planesOnLand);
    
 private:
+   Simulator() {}
+   Simulator(const Simulator&);
+
    void addObserversOfTimer(int planesOnLand); 
    
 };
