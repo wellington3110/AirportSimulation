@@ -2,6 +2,7 @@
 #include "RandomNumberGenerator.h"
 #include "Plane.h"
 #include "Airport.h"
+#include "AircraftLog.h"
 
 static AircraftManipulator* instance;
 
@@ -22,7 +23,7 @@ AircraftManipulator* AircraftManipulator::getInstance()
 void AircraftManipulator::generatePlane()
 {
    int timeOnLand= RandomNumberGenerator::generateNumberBetween(20, 40);
-   Aircraft* newAircraft= new Plane(Airport::getInstance(), timeOnLand);
+   Aircraft* newAircraft= new Plane(Airport::getInstance(), timeOnLand, AircraftLog::getInstance());
    planes.push_back(newAircraft);
 }
 

@@ -1,29 +1,29 @@
-﻿#include "ReportMediator.h"
+﻿#include "DataMediator.h"
 #include "ReportFactory.h"
 #include "Report.h"
 
 static Mediator* instance;
 
-ReportMediator::~ReportMediator()
+DataMediator::~DataMediator()
 {
    Data::deleteDataInstance();
 }
 
-void ReportMediator::deleteInstance()
+void DataMediator::deleteInstance()
 {
    if (instance)
       delete instance;
    instance= nullptr;
 }
 
-Mediator* ReportMediator::getInstance()
+Mediator* DataMediator::getInstance()
 {
    if(!instance)
-      instance= new ReportMediator;
+      instance= new DataMediator;
    return instance;
 }
 
-void ReportMediator::send(Data* data)
+void DataMediator::send(Data* data)
 {
    Report* report= ReportFactory::getInstance()->retrieveReport(data->getType());
    report->insert(data);

@@ -1,7 +1,8 @@
 ﻿#include "Plane.h"
 #include "TowerOfCommand.h"
+#include "Log.h"
 
-Plane::Plane(TowerOfCommand* _airport, int _timeOnLand) : timeToRequestTakeOff(_timeOnLand), airport(_airport)
+Plane::Plane(TowerOfCommand* _airport, int _timeOnLand, Log* _log) : timeToRequestTakeOff(_timeOnLand), airport(_airport), aircraftLog(_log)
 {
    sendLandingRequest();
 }

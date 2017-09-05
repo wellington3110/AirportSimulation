@@ -59,7 +59,6 @@ bool App::executeCmd(int option)
 
 Command* App::createCmd(int option)
 {   
-   
    switch (option) {
       case LANDED:                                          return new CmdLandingsNumber;
       case ON_LAND:                                         return new CmdPlanesOnLandNumber;
@@ -73,7 +72,6 @@ Command* App::createCmd(int option)
       case EXIT: Simulator::getInstance()->stop();          return new CmdRemoveData();
       default: gui->showMessage("error: Invalid input \n"); return new CmdIdle();   
    }
-   
 }
 
 

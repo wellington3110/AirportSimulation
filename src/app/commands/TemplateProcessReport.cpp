@@ -1,7 +1,7 @@
 ﻿#include "TemplateProcessReport.h"
 
-#include "Report.h"
 #include "Gui.h"
+#include "Report.h"
 #include "ReportFactory.h"
 
 void TemplateProcessReport::generateReport(Data::DataType data, Gui* gui)

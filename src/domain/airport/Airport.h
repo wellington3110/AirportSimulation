@@ -7,13 +7,15 @@
 #include "RunWay.h"
 #include "DataVendorToReport.h"
 
+class Log;
+
 class Airport : public TowerOfCommand, public DataVendorToReport
 {
 public:
    ~Airport();
 
    static TowerOfCommand* getInstance(); 
-   static TowerOfCommand* getInstance(int _spaceOnLand);
+   static TowerOfCommand* getInstance(int _spaceOnLand, Log* _towerCommandLog);
 
    enum TypeRequest {TAKE_OFF, LANDING};
    enum TypeConfirmation {TOOK_OFF, LANDED};
@@ -28,7 +30,7 @@ public:
    
 
 private:
-   Airport(int _spaceOnLand);
+   Airport(int _spaceOnLand, Log* _towerCommandLog);
    Airport(const Airport& c);
 
    struct Request
@@ -53,7 +55,8 @@ private:
    int planesLanding;
    int takeOffPending;
    
-   
+   Log* towerCommandLog;
+
    std::list<Request*>requests;
    typedef std::list<Request*>::iterator iterRequests;
 
@@ -64,10 +67,12 @@ private:
    AirportRunWay* getRunWayFree(Request* planeRequest);
 
    bool releaseRunWay(Request* planeRequest);
-   bool hasSpaceOnLand() {return spaceOnLand > planesOnLand;}
-   bool capacityExceeded() {return planesOnLand > (spaceOnLand * 70) / 100 ;}
-   bool isTakeOffFirstInQueue() {return requests.size() > 0 ? requests.front()->actualStatus == TAKE_OFF : false;}
-   bool landingIsInTimeOut(Request* planeRequest){return (planeRequest->waitingTime >= 32 && planeRequest->actualStatus == LANDING);}
+   bool hasSpaceOnLand() { return spaceOnLand > planesOnLand;}
+   bool capacityExceeded() { return planesOnLand > int(spaceOnLand * 0.7); }
+   bool isTakeOffFirstInQueue() { return requests.size() > 0 ? requests.front()->actualStatus == TAKE_OFF : false;}
+   bool landingIsInTimeOut(Request* planeRequest) { 
+      return (planeRequest->waitingTime >= 32) && (planeRequest->actualStatus == LANDING);
+   }
    
    void setUpRunWays();
    void updateRunWays();

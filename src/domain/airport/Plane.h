@@ -3,13 +3,15 @@
 #define INCLUDED_PLANE_H
 
 #include "Aircraft.h"
+#include <string>
 
+class Log;
 class TowerOfCommand;
 
 class Plane : public Aircraft
 {
 public:
-   Plane(TowerOfCommand* _airport, int _timeOnLand);
+   Plane(TowerOfCommand* _airport, int _timeOnLand, Log* _log);
  
    void updateStatus();
 
@@ -24,6 +26,10 @@ private:
    int timeToLand;
    int timeToTakeOff;
    int timeToRequestTakeOff;
+
+   std::string name;
+
+   Log* aircraftLog;
 
    TowerOfCommand* airport;
    AircraftStatus actualStatus;

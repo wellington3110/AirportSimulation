@@ -1,15 +1,15 @@
 #include "DataVendorToReport.h"
-#include "ReportMediator.h"
+#include "DataMediator.h"
 
 
 DataVendorToReport::~DataVendorToReport()
 {
-   ReportMediator::deleteInstance();
+   DataMediator::deleteInstance();
 }
 
 DataVendorToReport::DataVendorToReport()
 {
-   mediator= ReportMediator::getInstance();
+   mediator= DataMediator::getInstance();
 }
 
 void DataVendorToReport::sendDateToReport(Data* data)

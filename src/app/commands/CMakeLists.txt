@@ -7,8 +7,6 @@ include_directories("${PROJECT_SOURCE_DIR}/src/domain")
 add_library(command ${COMMAND})
 
 target_link_libraries(command gui)
-target_link_libraries(command airport)
+target_link_libraries(command domain)
 
 set_property(TARGET command PROPERTY FOLDER "app")
-
-

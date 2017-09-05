@@ -1,8 +1,10 @@
 #include "Airport.h"
 #include "Aircraft.h"
 #include "Data.h"
+#include "Log.h"
 
 static TowerOfCommand* instance;
+
 
 Airport::~Airport()
 {
@@ -10,8 +12,10 @@ Airport::~Airport()
       delete *request;
 }
 
-Airport::Airport(int _spaceOnLand): DataVendorToReport(), spaceOnLand(_spaceOnLand), planesOnLand(0), takeOffPending(0), planesLanding(0)
+Airport::Airport(int _spaceOnLand, Log* _towerCommandLog): DataVendorToReport(), spaceOnLand(_spaceOnLand), planesOnLand(0), takeOffPending(0), planesLanding(0),
+towerCommandLog(_towerCommandLog)
 {
+
    setUpRunWays();
 }
 
@@ -26,14 +30,14 @@ void Airport::setUpRunWays()
 TowerOfCommand* Airport::getInstance()
 {
    if (!instance)
-      instance= getInstance(5);
+      instance= getInstance(5, nullptr);
    return instance;
 }                             //
                                                                              
-TowerOfCommand* Airport::getInstance(int _spaceOnLand)
+TowerOfCommand* Airport::getInstance(int _spaceOnLand, Log* _towerCommandLog)
 {
    if (!instance)
-      instance= new Airport(_spaceOnLand);
+      instance= new Airport(_spaceOnLand, _towerCommandLog);
    return instance;
 }                                                                                      
 //////////////////////////////////////////////////////////////////////////////

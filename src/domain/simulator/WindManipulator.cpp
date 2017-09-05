@@ -28,11 +28,9 @@ WindManipulator* WindManipulator::getInstance()
 
 void WindManipulator::update(const int& actualTime)
 {
-   if(windEventsTime.size() > 0) {
-      if(isValidUpdateStatusWind(actualTime)){
-         windEventsTime.pop();
-         Wind::getInstance()->updateDirection(actualTime);
-      }
+   if (isValidUpdateStatusWind(actualTime)) {
+      windEventsTime.pop();
+      Wind::getInstance()->updateDirection(actualTime);
    }
 }
 

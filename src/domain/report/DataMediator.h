@@ -4,18 +4,18 @@
 
 #include "Mediator.h"
 
-class ReportMediator : public Mediator
+class DataMediator : public Mediator
 {
 public:
-   ~ReportMediator();
+   ~DataMediator();
    static void deleteInstance();
    static Mediator* getInstance();
    
    void receive(Data* data) { send(data); }
 
 private:
-   ReportMediator(){}
-   ReportMediator(const ReportMediator&);
+   DataMediator(){}
+   DataMediator(const DataMediator&);
 
    void send(Data* data);
 };

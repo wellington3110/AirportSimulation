@@ -3,6 +3,7 @@
 #include "Airport.h"
 #include "AircraftManipulator.h"
 #include "WindManipulator.h"
+#include "TowerOfCommandLog.h"
 
 static Simulator* instance;
 
@@ -34,7 +35,7 @@ void Simulator::run(int planesOnLand)
 
 void Simulator::addObserversOfTimer(int planesOnLand)
 {
-   Timer::getInstance()->add(Airport::getInstance(planesOnLand));
+   Timer::getInstance()->add(Airport::getInstance( planesOnLand, TowerOfCommandLog::getInstance() ));
    Timer::getInstance()->add(AircraftManipulator::getInstance());
    Timer::getInstance()->add(WindManipulator::getInstance());
 }
