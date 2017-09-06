@@ -3,7 +3,6 @@
 #define INCLUDED_PLANE_H
 
 #include "Aircraft.h"
-#include <string>
 
 class Log;
 class TowerOfCommand;
@@ -11,9 +10,10 @@ class TowerOfCommand;
 class Plane : public Aircraft
 {
 public:
-   Plane(TowerOfCommand* _airport, int _timeOnLand, Log* _log);
+   Plane(TowerOfCommand* _airport, int _timeOnLand, Log* _log, std::string _description);
  
    void updateStatus();
+
 
    virtual bool receivePermissionToLand();
    virtual bool receivePermissionToTakeOff();
@@ -21,6 +21,7 @@ public:
    virtual void receiveRequestToLandDenied() {changeStatusTo(SENT_ANOTHER_AIRPORT);}
 
    AircraftStatus getActualStatus() { return actualStatus; }
+   virtual std::string getName() { return name; }
 
 private:
    int timeToLand;
@@ -45,6 +46,9 @@ private:
    bool isValidLanding() {return timeToLand == 0;}
    bool isValidTakeOff() {return timeToTakeOff == 0;}
    bool isValidTimeToRequestTakeOff(){ return timeToRequestTakeOff <= 0;}
+
+
+
 
 };
 

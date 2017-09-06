@@ -2,6 +2,7 @@
 #ifndef INCLUDED_PLANEMANIPULATOR_H
 #define INCLUDED_PLANEMANIPULATOR_H
 
+#include <map>
 #include <queue>
 #include "TimerObserver.h"
 #include "Aircraft.h"
@@ -17,17 +18,19 @@ public:
    void update(const int& actualTime);   
   
 private:
-   AircraftManipulator(){ generateEventsToPlane(); }
+   AircraftManipulator();
    AircraftManipulator(const AircraftManipulator&){}
 
    std::queue<int> planeEventsTime;
+   std::map<int, std::string> planeNames;
 
    std::vector<Aircraft*> planes;
    typedef std::vector<Aircraft*>::iterator iterAircraft;
 
    void generateEventsToPlane();
-   bool aircraftTookOff(iterAircraft iter);
 
+
+   bool aircraftTookOff(iterAircraft iter);
    bool aircraftWasSentAnotherAirport(Aircraft* aircraft) { return aircraft->getActualStatus() == Aircraft::SENT_ANOTHER_AIRPORT; }
    bool isValidGenerateAircraft(const int& actualTime) { return planeEventsTime.front() >= actualTime && planeEventsTime.size() > 0; }
    

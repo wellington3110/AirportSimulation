@@ -18,7 +18,6 @@ public:
    static TowerOfCommand* getInstance(int _spaceOnLand, Log* _towerCommandLog);
 
    enum TypeRequest {TAKE_OFF, LANDING};
-   enum TypeConfirmation {TOOK_OFF, LANDED};
 
    
    virtual void update(const int& actualTime);
@@ -26,7 +25,7 @@ public:
    virtual void receiveLandingRequest(Aircraft* plane);
    virtual void receiveTakeOffRequest(Aircraft* plane);
    virtual void receiveConfirmationLanding(Aircraft* plane);
-   virtual void receiveConfirmationTakeOff(Aircraft* plane) {processesConfirmation(TOOK_OFF, plane);}
+   virtual void receiveConfirmationTakeOff(Aircraft* plane);
    
 
 private:
@@ -88,7 +87,7 @@ private:
    void sendPermissionToPlane(Request* planeRequest);
    void sendAircraftToAnotherAirport(Request* planeRequest);
    void updatePlanesRequestingTakeOffGreaterThanFiveReport();
-   void processesConfirmation(TypeConfirmation type, Aircraft* plane);
+   void processesConfirmation(Aircraft* plane);
    void addWaitingTime(Request* planeRequest) { planeRequest->waitingTime += 4; }
 
 };

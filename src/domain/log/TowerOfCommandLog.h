@@ -12,7 +12,7 @@ public:
    static Log* getInstance();
 
 private:
-   TowerOfCommandLog() {}
+   TowerOfCommandLog() { generateMessages(); }
    TowerOfCommandLog(const TowerOfCommandLog&);
 
 protected:

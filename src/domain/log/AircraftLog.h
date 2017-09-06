@@ -12,7 +12,7 @@ public:
    static Log* getInstance();
 
 private:
-   AircraftLog() {};
+   AircraftLog() { generateMessages(); }
    AircraftLog(const AircraftLog&);
 
 protected:

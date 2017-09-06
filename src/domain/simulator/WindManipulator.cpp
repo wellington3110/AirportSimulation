@@ -1,5 +1,5 @@
 ﻿#include "WindManipulator.h"
-#include "RandomNumberGenerator.h"
+#include "Random.h"
 #include "Wind.h"
 
 static WindManipulator* instance;
@@ -14,7 +14,7 @@ WindManipulator::~WindManipulator()
 void WindManipulator::generateEventsToWind()
 {
    for (int eventTime = 0; eventTime < 4320;) {
-      eventTime += RandomNumberGenerator::generateNumberBetween(16, 40);
+      eventTime += Random::generateNumberBetween(16, 40);
       windEventsTime.push(eventTime);
    }
 }
