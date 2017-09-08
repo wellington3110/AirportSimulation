@@ -8,7 +8,7 @@
 class CmdWindChangesHistoric : public Command, public TemplateProcessReport
 {
 public:
-   void execute(Gui* gui) { generateReport(Data::WIND_CHANGES, gui); }
+   void execute(UserInterface* ui) { generateReport(Data::WIND_CHANGES, ui); }
 
 protected:
    std::string getPresentationMessage() { return "Histórico de mudanças da direção do vento:\n"; }

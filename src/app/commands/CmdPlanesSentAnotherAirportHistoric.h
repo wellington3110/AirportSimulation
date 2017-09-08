@@ -8,7 +8,7 @@
 class CmdPlanesSentAnotherAirportHistoric : public Command, public TemplateProcessReport
 {
 public:
-   void execute(Gui* gui)  {generateReport(Data::PLANES_SENT_ANOTHER_AIRPORT, gui); }
+   void execute(UserInterface* ui)  {generateReport(Data::PLANES_SENT_ANOTHER_AIRPORT, ui); }
 
 protected:
    std::string getPresentationMessage() { return "Histórico de aviões enviados para outros aeroportos:\n";}

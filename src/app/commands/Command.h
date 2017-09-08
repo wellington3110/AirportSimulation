@@ -2,14 +2,14 @@
 #ifndef INCLUDED_COMMAND_H
 #define INCLUDED_COMMAND_H
 
-class Gui;
+class UserInterface;
 class ReportFactory;
 
 class Command
 {
 public:
    virtual ~Command() {}
-   virtual void execute(Gui* gui) = 0;
+   virtual void execute(UserInterface* ui) = 0;
 };
 
 #endif

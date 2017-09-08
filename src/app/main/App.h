@@ -5,7 +5,7 @@
 
 class Command;
 class Simulator;
-class Gui;
+class UserInterface;
 
 class App
 {
@@ -14,13 +14,13 @@ public:
    App();
 
    enum OPTIONS {LANDED= 1, ON_LAND, WAITING, WIND_HISTORIC, WAITING_GREATER_THAN_FIVE_HISTORIC,
-      EXCEEDED_CAPACITY_HISTORIC, SENT_ANOTHER_AIRPORT_HISTORIC, TAKE_OFF_REQUESTS_GREATER_THAN_FIVE,
+      EXCEEDED_CAPACITY_HISTORIC, SENT_ANOTHER_AIRPORT_HISTORIC, TAKE_OFF_REQUESTS_GREATER_THAN_FIVE, LIST_UNREAD_EVENTS,
       CLS= 50, EXIT= 99};
 
    void run();
 
 private:
-   Gui* gui;
+   UserInterface* gui;
 
    bool executeCmd(int option);
    Command* createCmd(int option);

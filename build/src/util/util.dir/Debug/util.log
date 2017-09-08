@@ -1,0 +1,28 @@
+﻿Build started 05/09/2017 16:08:18.
+     1>Project "C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\util\util.vcxproj" on node 2 (build target(s)).
+     1>PrepareForBuild:
+         Creating directory "C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\util\Debug\".
+       InitializeBuildStatus:
+         Creating "util.dir\Debug\util.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       CustomBuild:
+         Building Custom Rule C:/Users/wellington.macedo/Desktop/Wellington/Projetos/AirportSimulation/src/util/CMakeLists.txt
+         CMake does not need to re-run because C:/Users/wellington.macedo/Desktop/Wellington/Projetos/AirportSimulation/build/src/util/CMakeFiles/generate.stamp is up-to-date.
+       ClCompile:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\CL.exe /c /IC:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\domain\airport /IC:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\domain\report /IC:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\domain\log /IC:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\domain\simulator /Zi /nologo /W3 /WX- /Od /Ob0 /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"util.dir\Debug\\" /Fd"util.dir\Debug\vc100.pdb" /Gd /TP /errorReport:prompt ..\..\..\src\util\Converter.cpp ..\..\..\src\util\InputControl.cpp ..\..\..\src\util\RandomNumberGenerator.cpp
+         Converter.cpp
+         InputControl.cpp
+         RandomNumberGenerator.cpp
+         Generating Code...
+       Lib:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\Lib.exe /OUT:"C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\util\Debug\util.lib" /NOLOGO util.dir\Debug\Converter.obj
+         util.dir\Debug\InputControl.obj
+         util.dir\Debug\RandomNumberGenerator.obj  /machine:x64
+         util.vcxproj -> C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\util\Debug\util.lib
+       FinalizeBuildStatus:
+         Deleting file "util.dir\Debug\util.unsuccessfulbuild".
+         Touching "util.dir\Debug\util.lastbuildstate".
+     1>Done Building Project "C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\util\util.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.15

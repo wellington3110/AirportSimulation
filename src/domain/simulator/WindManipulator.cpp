@@ -1,6 +1,7 @@
 ﻿#include "WindManipulator.h"
 #include "Random.h"
 #include "Wind.h"
+#include "WindLog.h"
 
 static WindManipulator* instance;
 
@@ -8,7 +9,7 @@ static WindManipulator* instance;
 WindManipulator::~WindManipulator()
 {
    delete Wind::getInstance();
-   instance= nullptr;
+   delete WindLog::getInstance();
 }
 
 void WindManipulator::generateEventsToWind()

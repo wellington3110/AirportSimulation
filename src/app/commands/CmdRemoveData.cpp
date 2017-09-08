@@ -1,7 +1,7 @@
 ﻿#include "CmdRemoveData.h"
 #include "ReportFactory.h"
 
-void CmdRemoveData::execute(Gui* gui)
+void CmdRemoveData::execute(UserInterface* gui)
 {
    delete ReportFactory::getInstance();
 }

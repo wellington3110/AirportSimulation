@@ -163,14 +163,14 @@ bool Airport::releaseRunWay(Request* planeRequest)
 
 void Airport::receiveLandingRequest(Aircraft* plane)
 {
-   towerCommandLog->generateLog(Log::RECEIVE_REQUEST_TOLAND, plane->getName());
+   towerCommandLog->generateLog(Log::RECEIVE_REQUEST_TOLAND, plane->getDescription());
    Request* newRequest= new Request(plane, LANDING);
    processesRequest(newRequest);
 }
 
 void Airport::receiveTakeOffRequest(Aircraft* plane)
 {
-   towerCommandLog->generateLog(Log::RECEIVE_REQUEST_TOTAKEOFF, plane->getName());
+   towerCommandLog->generateLog(Log::RECEIVE_REQUEST_TOTAKEOFF, plane->getDescription());
    Request* newRequest= new Request(plane, TAKE_OFF);
    takeOffPending ++;
    processesRequest(newRequest); 
@@ -182,19 +182,19 @@ void Airport::processesRequest(Request* planeRequest)
       delete planeRequest;
    else {
       requests.push_back(planeRequest);
-      towerCommandLog->generateLog(Log::REQUEST_INSERTED_IN_REQUESTSQUEUE, planeRequest->plane->getName());
+      towerCommandLog->generateLog(Log::REQUEST_INSERTED_IN_REQUESTSQUEUE, planeRequest->plane->getDescription());
    }
 }
 
 void Airport::sendPermissionToPlane(Request* planeRequest)
 {
    if (planeRequest->actualStatus == LANDING) {
-      towerCommandLog->generateLog(Log::TORELEASE_RUNWAY_TOLAND, planeRequest->plane->getName());
+      towerCommandLog->generateLog(Log::TORELEASE_RUNWAY_TOLAND, planeRequest->plane->getDescription());
       planeRequest->plane->receivePermissionToLand();
       planesLanding++;
       planesOnLand++;
    } else {
-      towerCommandLog->generateLog(Log::TORELEASE_RUNWAY_TOTAKEOFF, planeRequest->plane->getName());
+      towerCommandLog->generateLog(Log::TORELEASE_RUNWAY_TOTAKEOFF, planeRequest->plane->getDescription());
       planeRequest->plane->receivePermissionToTakeOff();
       takeOffPending --;
       planesOnLand --;
@@ -206,7 +206,7 @@ void Airport::sendAircraftToAnotherAirport(Request* planeRequest)
 {
    planeRequest->plane->receiveRequestToLandDenied();
    sendDateToReport(Data::createData(actualTime, Data::PLANES_SENT_ANOTHER_AIRPORT));
-   towerCommandLog->generateLog(Log::AIRCRAFT_SENT_TO_ANOTHER_AIRPORT, planeRequest->plane->getName());
+   towerCommandLog->generateLog(Log::AIRCRAFT_SENT_TO_ANOTHER_AIRPORT, planeRequest->plane->getDescription());
 }
 
 Airport::AirportRunWay* Airport::getRunWayFree(Request* planeRequest)
@@ -228,14 +228,14 @@ Airport::AirportRunWay* Airport::getRunWayFree(Request* planeRequest)
 void Airport::receiveConfirmationLanding(Aircraft* plane)
 {
    processesConfirmation(plane);
-   towerCommandLog->generateLog(Log::RECEIVE_CONFIRMATION_OF_LANDING, plane->getName());
+   towerCommandLog->generateLog(Log::RECEIVE_CONFIRMATION_OF_LANDING, plane->getDescription());
    sendDateToReport(Data::createData(planesLanding, Data::LANDED));
 } 
 
 void Airport::receiveConfirmationTakeOff(Aircraft* plane)
 {
    processesConfirmation(plane);
-   towerCommandLog->generateLog(Log::RECEIVE_CONFIRMATION_OF_TAKEOFF, plane->getName());
+   towerCommandLog->generateLog(Log::RECEIVE_CONFIRMATION_OF_TAKEOFF, plane->getDescription());
 }
 
 Airport::AirportRunWay* Airport::getRunWayBeingUsed(Aircraft* plane)

@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{5FC1348E-0561-354C-9DC0-BADEC65CD608}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>ZERO_CHECK</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v100</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v100</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v100</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v100</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="CMakeFiles\db0ce47742bc536d02184e89e5ef4edb\generate.stamp.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Checking Build System</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/wellington.macedo/Desktop/Wellington/Projetos/AirportSimulation -BC:/Users/wellington.macedo/Desktop/Wellington/Projetos/AirportSimulation/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/wellington.macedo/Desktop/Wellington/Projetos/AirportSimulation/build/airport.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/wellington.macedo/Desktop/Wellington/Projetos/AirportSimulation/build/CMakeFiles/db0ce47742bc536d02184e89e5ef4edb/generate.stamp.rule;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\WindowsPaths.cmake;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\CMakeLists.txt;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\CMakeFiles\3.9.0\CMakeCCompiler.cmake;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\CMakeFiles\3.9.0\CMakeCXXCompiler.cmake;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\CMakeFiles\3.9.0\CMakeRCCompiler.cmake;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\CMakeFiles\3.9.0\CMakeSystem.cmake;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\CMakeLists.txt;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\app\CMakeLists.txt;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\app\commands\CMakeLists.txt;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\app\gui\CMakeLists.txt;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\app\main\CMakeLists.txt;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\domain\CMakeLists.txt;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\util\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\CMakeFiles\generate.stamp;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\CMakeFiles\generate.stamp;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\domain\CMakeFiles\generate.stamp;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\app\CMakeFiles\generate.stamp;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\app\commands\CMakeFiles\generate.stamp;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\app\gui\CMakeFiles\generate.stamp;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\app\main\CMakeFiles\generate.stamp;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\util\CMakeFiles\generate.stamp</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Checking Build System</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/wellington.macedo/Desktop/Wellington/Projetos/AirportSimulation -BC:/Users/wellington.macedo/Desktop/Wellington/Projetos/AirportSimulation/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/wellington.macedo/Desktop/Wellington/Projetos/AirportSimulation/build/airport.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/wellington.macedo/Desktop/Wellington/Projetos/AirportSimulation/build/CMakeFiles/db0ce47742bc536d02184e89e5ef4edb/generate.stamp.rule;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\WindowsPaths.cmake;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\CMakeLists.txt;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\CMakeFiles\3.9.0\CMakeCCompiler.cmake;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\CMakeFiles\3.9.0\CMakeCXXCompiler.cmake;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\CMakeFiles\3.9.0\CMakeRCCompiler.cmake;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\CMakeFiles\3.9.0\CMakeSystem.cmake;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\CMakeLists.txt;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\app\CMakeLists.txt;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\app\commands\CMakeLists.txt;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\app\gui\CMakeLists.txt;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\app\main\CMakeLists.txt;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\domain\CMakeLists.txt;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\util\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\CMakeFiles\generate.stamp;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\CMakeFiles\generate.stamp;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\domain\CMakeFiles\generate.stamp;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\app\CMakeFiles\generate.stamp;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\app\commands\CMakeFiles\generate.stamp;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\app\gui\CMakeFiles\generate.stamp;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\app\main\CMakeFiles\generate.stamp;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\util\CMakeFiles\generate.stamp</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Checking Build System</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/wellington.macedo/Desktop/Wellington/Projetos/AirportSimulation -BC:/Users/wellington.macedo/Desktop/Wellington/Projetos/AirportSimulation/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/wellington.macedo/Desktop/Wellington/Projetos/AirportSimulation/build/airport.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/Users/wellington.macedo/Desktop/Wellington/Projetos/AirportSimulation/build/CMakeFiles/db0ce47742bc536d02184e89e5ef4edb/generate.stamp.rule;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\WindowsPaths.cmake;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\CMakeLists.txt;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\CMakeFiles\3.9.0\CMakeCCompiler.cmake;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\CMakeFiles\3.9.0\CMakeCXXCompiler.cmake;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\CMakeFiles\3.9.0\CMakeRCCompiler.cmake;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\CMakeFiles\3.9.0\CMakeSystem.cmake;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\CMakeLists.txt;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\app\CMakeLists.txt;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\app\commands\CMakeLists.txt;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\app\gui\CMakeLists.txt;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\app\main\CMakeLists.txt;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\domain\CMakeLists.txt;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\util\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\CMakeFiles\generate.stamp;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\CMakeFiles\generate.stamp;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\domain\CMakeFiles\generate.stamp;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\app\CMakeFiles\generate.stamp;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\app\commands\CMakeFiles\generate.stamp;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\app\gui\CMakeFiles\generate.stamp;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\app\main\CMakeFiles\generate.stamp;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\util\CMakeFiles\generate.stamp</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Checking Build System</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/wellington.macedo/Desktop/Wellington/Projetos/AirportSimulation -BC:/Users/wellington.macedo/Desktop/Wellington/Projetos/AirportSimulation/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/wellington.macedo/Desktop/Wellington/Projetos/AirportSimulation/build/airport.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/wellington.macedo/Desktop/Wellington/Projetos/AirportSimulation/build/CMakeFiles/db0ce47742bc536d02184e89e5ef4edb/generate.stamp.rule;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\WindowsPaths.cmake;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\CMakeLists.txt;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\CMakeFiles\3.9.0\CMakeCCompiler.cmake;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\CMakeFiles\3.9.0\CMakeCXXCompiler.cmake;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\CMakeFiles\3.9.0\CMakeRCCompiler.cmake;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\CMakeFiles\3.9.0\CMakeSystem.cmake;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\CMakeLists.txt;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\app\CMakeLists.txt;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\app\commands\CMakeLists.txt;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\app\gui\CMakeLists.txt;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\app\main\CMakeLists.txt;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\domain\CMakeLists.txt;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\src\util\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\CMakeFiles\generate.stamp;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\CMakeFiles\generate.stamp;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\domain\CMakeFiles\generate.stamp;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\app\CMakeFiles\generate.stamp;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\app\commands\CMakeFiles\generate.stamp;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\app\gui\CMakeFiles\generate.stamp;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\app\main\CMakeFiles\generate.stamp;C:\Users\wellington.macedo\Desktop\Wellington\Projetos\AirportSimulation\build\src\util\CMakeFiles\generate.stamp</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

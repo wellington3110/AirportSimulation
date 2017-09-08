@@ -5,7 +5,9 @@
 #include <vector>
 #include "DataVendorToReport.h"
 
+
 class WindObservers;
+class Log;
 
 class Wind : public DataVendorToReport
 {
@@ -21,11 +23,13 @@ public:
    Direction& getDirection() { return actualDirection; }
 
 private:
-   Wind() : DataVendorToReport(), actualDirection(NORTH_SOUTH) {}
+   Wind(Log* _windLog) : DataVendorToReport(), actualDirection(NORTH_SOUTH), windLog(_windLog) {}
    Wind(const Wind&);
 
    Direction actualDirection;
    std::vector<WindObservers*> observers;
+
+   Log* windLog; 
 };
 
 #endif 

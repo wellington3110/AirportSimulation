@@ -7,7 +7,7 @@
 class CmdRemoveData : public Command
 {
 public:
-   void execute(Gui* gui);
+   void execute(UserInterface* ui);
 };
 
 #endif

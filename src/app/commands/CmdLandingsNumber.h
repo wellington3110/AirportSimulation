@@ -9,7 +9,7 @@ class CmdLandingsNumber : public Command, public TemplateProcessReport
 {
 public:
    CmdLandingsNumber(){}
-   void execute(Gui* gui) { generateReport(Data::LANDED, gui);}
+   void execute(UserInterface* ui) { generateReport(Data::LANDED, ui);}
 
 protected:
    std::string getPresentationMessage() { return "Quantidade: ";}

@@ -9,7 +9,7 @@
 class CmdPlanesWaitingNumber : public Command, public TemplateProcessReport
 {   
 public:
-   void execute(Gui* gui) { generateReport(Data::PLANES_WAITING, gui); }
+   void execute(UserInterface* ui) { generateReport(Data::PLANES_WAITING, ui); }
 
 protected:
    std::string getPresentationMessage() { return ""; }

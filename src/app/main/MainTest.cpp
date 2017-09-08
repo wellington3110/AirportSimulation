@@ -2,9 +2,7 @@
 #include <clocale>
 #include <crtdbg.h>
 #include <Windows.h>
-#include <iostream>
-#include "Airport.h"
-#include <map>
+#include <string>
 
 int main()
 {

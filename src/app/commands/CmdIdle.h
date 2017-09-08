@@ -7,7 +7,7 @@
 class CmdIdle : public Command
 {
 public:
-   void execute(Gui* gui) {}
+   void execute(UserInterface* ui) {}
 
 };
 

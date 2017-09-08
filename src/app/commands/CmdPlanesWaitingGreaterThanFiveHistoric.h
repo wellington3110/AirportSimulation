@@ -8,7 +8,7 @@
 class CmdPlanesWaitingGreaterThanFiveHistoric : public Command, public TemplateProcessReport
 {
 public:
-   void execute(Gui* gui) { generateReport(Data::WAITING_GREATER_THAN_5, gui); }
+   void execute(UserInterface* ui) { generateReport(Data::WAITING_GREATER_THAN_5, ui); }
 
 protected:
    std::string getPresentationMessage() { return "Histórico de aviões aguardando maior que 5:\n"; }

@@ -3,6 +3,7 @@
 #include "Plane.h"
 #include "Airport.h"
 #include "AircraftLog.h"
+#include <sstream>
 
 static AircraftManipulator* instance;
 
@@ -13,7 +14,7 @@ AircraftManipulator::~AircraftManipulator()
    delete AircraftLog::getInstance();
 }
 
-AircraftManipulator::AircraftManipulator() 
+AircraftManipulator::AircraftManipulator() : planeNumber(0) 
 { 
    generateEventsToPlane();
 
@@ -36,13 +37,20 @@ AircraftManipulator* AircraftManipulator::getInstance()
    return instance;
 }
 
+std::string AircraftManipulator::generatePlaneDescription()
+{
+   std::stringstream planeDescription;
+   planeDescription << planeNames[Random::generateNumberBetween(1, 10)] + " de número de vôo " << planeNumber;
+   return planeDescription.str();
+}
 
 void AircraftManipulator::generatePlane()
 {
    int timeOnLand= Random::generateNumberBetween(20, 40);
-   std::string planeName = planeNames[Random::generateNumberBetween(1, 10)];
-   Aircraft* newAircraft= new Plane(Airport::getInstance(), timeOnLand, AircraftLog::getInstance(), planeName);
+   std::string planeDescription= generatePlaneDescription();
+   Aircraft* newAircraft= new Plane(Airport::getInstance(), timeOnLand, AircraftLog::getInstance(), planeDescription);
    planes.push_back(newAircraft);
+   planeNumber++;
 }
 
 void AircraftManipulator::generateEventsToPlane()

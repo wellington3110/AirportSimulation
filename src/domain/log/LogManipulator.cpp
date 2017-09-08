@@ -4,6 +4,16 @@ static LogManipulator* instance;
 const std::string variable= "[x]";
 typedef std::vector<std::string>::iterator iterator;
 
+bool hasVariable(std::string log)
+{
+   int x= log.find(variable);
+   return x > 0;
+}
+
+void replaceVariable(std::string& log, std::string& varValue)
+{
+   log.replace( log.find(variable), variable.size(), varValue );      
+}
 
 LogManipulator* LogManipulator::getInstance()
 {
@@ -17,7 +27,7 @@ std::string LogManipulator::getLogs()
    std::string log;
    for (iterator iter= unreadLogs.begin(); iter != unreadLogs.end(); ++iter ) {
       log+= *iter;
-      log+= "/n";
+      log+= "\n";
    }
    unreadLogs.clear();
    return log;
@@ -25,9 +35,12 @@ std::string LogManipulator::getLogs()
 
 void LogManipulator::addLog(std::string log, std::string varValue)
 {
-   log.replace( log.find(variable), variable.size(), varValue );   
+   if(hasVariable(log))
+      replaceVariable(log, varValue);      
    unreadLogs.push_back(log);
    allLogs.push_back(log);
 }
+
+
 
 

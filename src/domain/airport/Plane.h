@@ -21,14 +21,14 @@ public:
    virtual void receiveRequestToLandDenied() {changeStatusTo(SENT_ANOTHER_AIRPORT);}
 
    AircraftStatus getActualStatus() { return actualStatus; }
-   virtual std::string getName() { return name; }
+   virtual std::string getDescription() { return description; }
 
 private:
    int timeToLand;
    int timeToTakeOff;
    int timeToRequestTakeOff;
 
-   std::string name;
+   std::string description;
 
    Log* aircraftLog;
 

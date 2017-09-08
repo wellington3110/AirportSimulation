@@ -5,7 +5,7 @@
 #include "Data.h"
 
 class Report;
-class Gui;
+class UserInterface;
 
 class TemplateProcessReport
 {
@@ -17,7 +17,7 @@ protected:
 
    virtual std::string getPresentationMessage() = 0;
 
-   void generateReport(Data::DataType data, Gui* gui);
+   void generateReport(Data::DataType data, UserInterface* ui);
    
 private:
    TemplateProcessReport (const TemplateProcessReport&);

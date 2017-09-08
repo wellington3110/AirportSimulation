@@ -1,0 +1,7 @@
+C:/Users/wellington.macedo/Desktop/Wellington/Projetos/AirportSimulation/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/wellington.macedo/Desktop/Wellington/Projetos/AirportSimulation/build/CMakeFiles/ZERO_CHECK.dir
+C:/Users/wellington.macedo/Desktop/Wellington/Projetos/AirportSimulation/build/src/domain/CMakeFiles/domain.dir
+C:/Users/wellington.macedo/Desktop/Wellington/Projetos/AirportSimulation/build/src/app/commands/CMakeFiles/command.dir
+C:/Users/wellington.macedo/Desktop/Wellington/Projetos/AirportSimulation/build/src/app/gui/CMakeFiles/gui.dir
+C:/Users/wellington.macedo/Desktop/Wellington/Projetos/AirportSimulation/build/src/app/main/CMakeFiles/main.dir
+C:/Users/wellington.macedo/Desktop/Wellington/Projetos/AirportSimulation/build/src/util/CMakeFiles/util.dir

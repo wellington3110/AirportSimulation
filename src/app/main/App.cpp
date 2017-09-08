@@ -1,5 +1,5 @@
 ﻿#include "App.h"
-#include "ConsoleGui.h"
+#include "Console.h"
 #include "Command.h"
 #include "CmdLandingsNumber.h"
 #include "CmdPlanesOnLandNumber.h"
@@ -14,6 +14,7 @@
 #include <Windows.h>
 
 #include "CmdRemoveData.h"
+#include "CmdToListUnreadEvents.h"
 
 App::~App()
 {
@@ -23,7 +24,7 @@ App::~App()
 
 App::App()
 {
-   gui= new ConsoleGui;
+   gui= new Console;
 }
 
 DWORD WINAPI threadSimulator(LPVOID param)
@@ -68,6 +69,7 @@ Command* App::createCmd(int option)
       case EXCEEDED_CAPACITY_HISTORIC:                      return new CmdPlanesOnLandExceededCapacityHistoric;
       case SENT_ANOTHER_AIRPORT_HISTORIC:                   return new CmdPlanesSentAnotherAirportHistoric;
       case TAKE_OFF_REQUESTS_GREATER_THAN_FIVE:             return new CmdTakeOffRequestGreaterThanFiveHistoric;
+      case LIST_UNREAD_EVENTS:                              return new CmdToListUnreadEvents;
       case CLS: gui->clearDisplay();                        return new CmdIdle();
       case EXIT: Simulator::getInstance()->stop();          return new CmdRemoveData();
       default: gui->showMessage("error: Invalid input \n"); return new CmdIdle();   
