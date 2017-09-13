@@ -50,7 +50,7 @@ void Console::showMenu()
    << "6. Horários com aviões em solo maior que 70% da capacidade \n"
    << "7. Horários com aviões enviados a outros aerportos \n"
    << "8. Horários com solicitações para decolagens pendentes acima de 5 \n"
-   << "9. Listar os eventos do sistemas não lidos\n"
+   << "9. Listar os eventos do sistema não lidos\n"
    << "50. Limpar tela\n"
    << "99. Exit \n\n";
 }

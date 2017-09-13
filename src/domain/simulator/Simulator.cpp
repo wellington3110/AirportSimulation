@@ -4,6 +4,7 @@
 #include "AircraftManipulator.h"
 #include "WindManipulator.h"
 #include "TowerOfCommandLog.h"
+#include "LogManipulator.h"
 
 static Simulator* instance;
 
@@ -13,6 +14,7 @@ Simulator::~Simulator()
    delete Airport::getInstance();
    delete AircraftManipulator::getInstance();
    delete WindManipulator::getInstance();
+   delete LogManipulator::getInstance();
 }
 
 Simulator* Simulator::getInstance()

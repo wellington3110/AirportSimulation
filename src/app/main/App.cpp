@@ -1,4 +1,5 @@
 ﻿#include "App.h"
+#include "Gui.h"
 #include "Console.h"
 #include "Command.h"
 #include "CmdLandingsNumber.h"
@@ -24,30 +25,33 @@ App::~App()
 
 App::App()
 {
-   gui= new Console;
+   gui= new Gui(this);
 }
 
 DWORD WINAPI threadSimulator(LPVOID param)
 {
-   int* planesOnLand= static_cast<int*>(param);
-   Simulator::getInstance()->run(*planesOnLand);
-   delete planesOnLand;
+   int planesOnLand= int(param);
+   Simulator::getInstance()->run(planesOnLand);
    return 0;
 }
 
 void App::startSimulator()
 {
-   int* planesOnLand= new int(gui->getPlanesOnLand());
-   CreateThread(nullptr, 0, threadSimulator, planesOnLand, 0, nullptr);
+   int planesOnLand= gui->getPlanesOnLand();
+   CreateThread(nullptr, 0, threadSimulator, (void*)planesOnLand, 0, nullptr);
 }
 
 void App::run()
 {
    startSimulator();
-   bool keep;
-   do {
-      keep= executeCmd( gui->getMenuOption() );               
-   } while (keep);
+   if( dynamic_cast<Gui*>(gui) )
+      gui->getMenuOption();
+   else {
+      bool keep;
+      do {
+         keep= executeCmd( gui->getMenuOption() );               
+      } while (keep);
+   }
 }
 
 bool App::executeCmd(int option)

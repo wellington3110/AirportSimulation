@@ -2,10 +2,12 @@
 #include <clocale>
 #include <crtdbg.h>
 #include <Windows.h>
-#include <string>
+#include <QApplication>
 
-int main()
-{
+
+int main(int argc, char *argv[])
+{              
+   QApplication app(argc, argv);
    _CrtMemState s1, s2;
    
    _CrtMemCheckpoint(&s1);

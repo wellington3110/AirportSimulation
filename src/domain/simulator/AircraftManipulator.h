@@ -38,6 +38,7 @@ private:
    bool aircraftWasSentAnotherAirport(Aircraft* aircraft) { return aircraft->getActualStatus() == Aircraft::SENT_ANOTHER_AIRPORT; }
    bool isValidGenerateAircraft(const int& actualTime) { return planeEventsTime.front() <= actualTime && planeEventsTime.size() > 0; }
    
+   static AircraftManipulator* instance;
 };
 
 #endif

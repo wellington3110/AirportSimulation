@@ -1,13 +1,14 @@
 ﻿#pragma once
 #ifndef INCLUDED_APP_H
 #define INCLUDED_APP_H
-
+#include "AppInterface.h"
 
 class Command;
 class Simulator;
 class UserInterface;
 
-class App
+class App : public AppInterface
+
 {
 public:
    ~App();
@@ -18,6 +19,7 @@ public:
       CLS= 50, EXIT= 99};
 
    void run();
+   void receiveOption(int option) { executeCmd(option); }
 
 private:
    UserInterface* gui;

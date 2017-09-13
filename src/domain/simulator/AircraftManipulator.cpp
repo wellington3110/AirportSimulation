@@ -5,7 +5,7 @@
 #include "AircraftLog.h"
 #include <sstream>
 
-static AircraftManipulator* instance;
+AircraftManipulator* AircraftManipulator::instance= nullptr;
 
 AircraftManipulator::~AircraftManipulator()
 {

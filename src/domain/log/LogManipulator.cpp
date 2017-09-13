@@ -1,4 +1,6 @@
 ﻿#include "LogManipulator.h"
+#include "Converter.h"
+#include "Timer.h"
 
 static LogManipulator* instance;
 const std::string variable= "[x]";
@@ -33,10 +35,16 @@ std::string LogManipulator::getLogs()
    return log;
 }
 
+void addTimeInFrontOfTheLog(std::string& log)
+{
+   log.insert(0, " Data: " + Converter::toTimeFormat(Timer::getInstance()->getActualTime()) + " | ");
+}
+
 void LogManipulator::addLog(std::string log, std::string varValue)
 {
    if(hasVariable(log))
-      replaceVariable(log, varValue);      
+      replaceVariable(log, varValue);
+   addTimeInFrontOfTheLog(log);
    unreadLogs.push_back(log);
    allLogs.push_back(log);
 }

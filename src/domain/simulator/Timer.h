@@ -12,6 +12,8 @@ public:
 
    static Timer* getInstance();
 
+   int getActualTime() {return actualTime * 4; }
+
    void notifyAll();
    void stop() {stopTime= true;}
    void add(TimerObserver* observer){ observers.push_back(observer); }
